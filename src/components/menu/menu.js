@@ -27,7 +27,8 @@ export default connect(
     class extends PureComponent<Props> {
       setActiveCharacter = () => this.props.setActiveCharacter("quinn");
 
-      createNewCharacter = () => this.props.createNewCharacter("quinn");
+      createNewCharacter = () =>
+        this.props.navigation.navigate("CreateNewCharacter");
 
       renderCharacter() {
         const { activeCharacter } = this.props;

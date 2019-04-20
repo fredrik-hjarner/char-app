@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { View, TextInput } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-paper";
 
 import { KeyValueService } from "api";
-import { Text } from "components";
+import { Text, TextInput } from "components";
 import styles, {
   firstColWidth,
   secondColWidth,
@@ -103,13 +103,12 @@ export default class App extends Component<Props, State> {
         <View style={{ width: firstColWidth }}>
           <Text style={{ fontSize: 19 }}>{ability}</Text>
         </View>
-        <View style={styles.inputFieldContainer}>
-          <TextInput
-            keyboardType="numeric"
-            onChangeText={text => this.changeAbility(ability, text)}
-            value={`${this.state[ability]}`}
-          />
-        </View>
+        <TextInput
+          style={styles.textInput}
+          keyboardType="numeric"
+          onChangeText={text => this.changeAbility(ability, text)}
+          value={`${this.state[ability]}`}
+        />
         <View style={{ width: thirdColWidth, alignItems: "center" }}>
           <Text style={{ fontSize: 19 }}>+1</Text>
         </View>

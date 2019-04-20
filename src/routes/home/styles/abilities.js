@@ -9,15 +9,8 @@ export default StyleSheet.create({
     /* justifyContent: "center",
     alignItems: "center" */
   },
-  inputFieldContainer: {
-    width: secondColWidth,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "red"
+  textInput: {
+    width: secondColWidth
   },
   abilityContainer: {
     flexDirection: "row",

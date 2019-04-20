@@ -91,7 +91,11 @@ export function* createNewCharacterSaga({ payload: { characterName } }) {
 }
 
 export function* fetchCharacterIndexSaga() {
-  // TODO: Must implement in search for prefix in API.
+  const characters = yield KeyValueService.getKeysWithPrefix(
+    "character-index/"
+  );
+  console.log("characters:", characters, "");
+
   yield put({ type: FETCH_CHARACTER_INDEX_SUCCESS });
 }
 

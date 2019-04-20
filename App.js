@@ -6,12 +6,13 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import { PersistGate } from "redux-persist/lib/integration/react";
 
 import { persistor, store } from "./src/state-management/store";
-import { Home, KeyValueTester } from "./src/routes";
+import { Home, KeyValueTester, CreateNewCharacter } from "./src/routes";
 
 const AppNavigator = createStackNavigator(
   {
     Home,
-    KeyValueTester
+    KeyValueTester,
+    CreateNewCharacter
   },
   {
     initialRouteName: "Home",

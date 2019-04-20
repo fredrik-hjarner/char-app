@@ -16,4 +16,10 @@ export default class {
       .get("http://localhost:8080/keys")
       .then(({ data }) => data || []);
   }
+
+  static getKeysWithPrefix(prefix: string): Promise<[string]> {
+    return axios
+      .get(`http://localhost:8080/keys?prefix=${prefix}`)
+      .then(({ data }) => data || []);
+  }
 }
