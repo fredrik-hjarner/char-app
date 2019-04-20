@@ -1,18 +1,37 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, View, TextInput } from "react-native";
+import { View, TextInput } from "react-native";
 import { Button } from "react-native-paper";
 
 import { KeyValueService } from "api";
 import { Text } from "components";
+import styles, {
+  firstColWidth,
+  secondColWidth,
+  thirdColWidth
+} from "./styles/abilities";
 
 type Props = {};
 
 export default class App extends PureComponent<Props> {
+  renderTableHeader() {
+    return (
+      <View style={[styles.abilityContainer, { opacity: 0.75 }]}>
+        <View style={{ width: firstColWidth }} />
+        <View style={{ width: secondColWidth, alignItems: "center" }}>
+          <Text>score</Text>
+        </View>
+        <View style={{ width: thirdColWidth, alignItems: "center" }}>
+          <Text>mod</Text>
+        </View>
+      </View>
+    );
+  }
+
   renderAbility(ability: string) {
     return (
       <View style={styles.abilityContainer}>
-        <View>
-          <Text>{ability}</Text>
+        <View style={{ width: firstColWidth }}>
+          <Text style={{ fontSize: 19 }}>{ability}</Text>
         </View>
         <View style={styles.inputFieldContainer}>
           <TextInput
@@ -21,8 +40,8 @@ export default class App extends PureComponent<Props> {
             //value={this.state.text}
           />
         </View>
-        <View>
-          <Text>+1</Text>
+        <View style={{ width: thirdColWidth, alignItems: "center" }}>
+          <Text style={{ fontSize: 19 }}>+1</Text>
         </View>
       </View>
     );
@@ -31,6 +50,7 @@ export default class App extends PureComponent<Props> {
   render() {
     return (
       <View style={styles.container}>
+        {this.renderTableHeader()}
         {this.renderAbility("strength")}
         {this.renderAbility("dexterity")}
         {this.renderAbility("constitution")}
@@ -41,24 +61,3 @@ export default class App extends PureComponent<Props> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    /* justifyContent: "center",
-    alignItems: "center" */
-  },
-  inputFieldContainer: {
-    width: 50,
-    // marginTop: 10,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "red"
-  },
-  abilityContainer: {
-    flexDirection: "row"
-  }
-});
