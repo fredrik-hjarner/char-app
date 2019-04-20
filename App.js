@@ -11,7 +11,7 @@ const AppNavigator = createStackNavigator(
     KeyValueTester
   },
   {
-    initialRouteName: "KeyValueTester",
+    initialRouteName: "Home",
     headerMode: "none"
   }
 );

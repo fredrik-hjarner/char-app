@@ -3,7 +3,7 @@ import { Platform, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 
 import { KeyValueService } from "api";
-import { Menu, Text } from "components";
+import { Menu, ActionsBar, Text } from "components";
 import Abilities from "./abilities";
 
 type Props = {};
@@ -59,16 +59,15 @@ export default class App extends PureComponent<Props, State> {
 
   render() {
     const { abilities } = this.state;
+    const actions = [
+      { text: "Load", callback: this.load },
+      { text: "Save", callback: this.save }
+    ];
     return (
       <View style={styles.container}>
         <Menu />
-        <Button mode="contained" onPress={this.load}>
-          Load
-        </Button>
-        <Button mode="contained" onPress={this.save}>
-          Save
-        </Button>
         <Abilities {...abilities} />
+        <ActionsBar actions={actions} />
       </View>
     );
   }
