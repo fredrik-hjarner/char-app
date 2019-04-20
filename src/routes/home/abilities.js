@@ -10,7 +10,14 @@ import styles, {
   thirdColWidth
 } from "./styles/abilities";
 
-type Props = {};
+type Props = {
+  strength: number,
+  dexterity: number,
+  constitution: number,
+  intelligence: number,
+  wisdom: number,
+  charisma: number
+};
 
 export default class App extends PureComponent<Props> {
   renderTableHeader() {
@@ -37,7 +44,7 @@ export default class App extends PureComponent<Props> {
           <TextInput
             keyboardType="numeric"
             onChangeText={text => this.setState({ text })}
-            //value={this.state.text}
+            value={`${this.props[ability]}`}
           />
         </View>
         <View style={{ width: thirdColWidth, alignItems: "center" }}>

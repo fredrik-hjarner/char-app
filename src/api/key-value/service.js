@@ -12,6 +12,8 @@ export default class {
   }
 
   static getAllKeys(): Promise<[string]> {
-    return axios.get("http://localhost:8080/keys").then(({ data }) => data);
+    return axios
+      .get("http://localhost:8080/keys")
+      .then(({ data }) => data || []);
   }
 }

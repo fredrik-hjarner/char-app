@@ -8,37 +8,67 @@ import Abilities from "./abilities";
 
 type Props = {};
 
-export default class App extends PureComponent<Props> {
-  componentDidMount() {
-    this.getAllKeys();
+type State = {
+  abilities: {
+    strength: number,
+    dexterity: number,
+    constitution: number,
+    intelligence: number,
+    wisdom: number,
+    charisma: number
   }
+};
 
-  getAllKeys = () =>
-    KeyValueService.getAllKeys()
-      .then(response => console.log("response:", response, ""))
+export default class App extends PureComponent<Props, State> {
+  state = {
+    abilities: {
+      strength: 1,
+      dexterity: 1,
+      constitution: 1,
+      intelligence: 1,
+      wisdom: 1,
+      charisma: 1
+    }
+  };
+
+  load = () =>
+    KeyValueService.getValue("bruno/abilities")
+      .then(response => {
+        console.log("response:", response, "");
+        /* const abilities = JSON.parse(response);
+        console.log("abilities:", abilities, ""); */
+        this.setState({ abilities: response });
+      })
       .catch(exception => console.log("exception:", exception, ""));
 
-  getValue = () =>
-    KeyValueService.getValue("alpha/fuck")
-      .then(response => console.log("response:", response, ""))
+  save = () => {
+    KeyValueService.setValue(
+      "bruno/abilities",
+      JSON.stringify({
+        strength: 18,
+        dexterity: 1,
+        constitution: 1,
+        intelligence: 1,
+        wisdom: 1,
+        charisma: 1
+      })
+    )
+      .then(() => console.log("saved!"))
       .catch(exception => console.log("exception:", exception, ""));
-
-  setValue = () =>
-    KeyValueService.setValue("alpha/fuck", "some value")
-      .then(response => console.log("response:", response, ""))
-      .catch(exception => console.log("exception:", exception, ""));
+  };
 
   render() {
+    const { abilities } = this.state;
     return (
       <View style={styles.container}>
         <Menu />
-        <Button mode="contained" onPress={this.setValue}>
-          Set value
+        <Button mode="contained" onPress={this.load}>
+          Load
         </Button>
-        <Button mode="contained" onPress={this.getValue}>
-          Get value
+        <Button mode="contained" onPress={this.save}>
+          Save
         </Button>
-        <Abilities />
+        <Abilities {...abilities} />
       </View>
     );
   }
