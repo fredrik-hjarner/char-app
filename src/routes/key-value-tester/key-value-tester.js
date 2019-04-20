@@ -4,6 +4,7 @@ import { Button } from "react-native-paper";
 
 import { KeyValueService } from "api";
 import { Menu, Text } from "components";
+import { LayoutWithHeader } from "layouts";
 
 type Props = {};
 
@@ -23,16 +24,6 @@ export default class extends PureComponent<Props, State> {
       .then(keys => this.setState({ keys }))
       .catch(exception => console.log("exception:", exception, ""));
 
-  getValue = () =>
-    KeyValueService.getValue("alpha/fuck")
-      .then(response => console.log("response:", response, ""))
-      .catch(exception => console.log("exception:", exception, ""));
-
-  setValue = () =>
-    KeyValueService.setValue("alpha/fuck", "some value")
-      .then(response => console.log("response:", response, ""))
-      .catch(exception => console.log("exception:", exception, ""));
-
   renderKeys() {
     const { keys } = this.state;
     return keys.map(k => <Text>{k}</Text>);
@@ -40,23 +31,13 @@ export default class extends PureComponent<Props, State> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Menu />
-        {this.renderKeys()}
-        <Button mode="contained" onPress={this.setValue}>
-          Set value
-        </Button>
-        <Button mode="contained" onPress={this.getValue}>
-          Get value
-        </Button>
-      </View>
+      <LayoutWithHeader>
+        <View style={styles.container}>{this.renderKeys()}</View>
+      </LayoutWithHeader>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center"
-  }
+  container: { padding: 20 }
 });

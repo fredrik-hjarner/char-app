@@ -85,7 +85,7 @@ export default class App extends Component<Props, State> {
 
   renderTableHeader() {
     return (
-      <View style={[styles.abilityContainer, { opacity: 0.75 }]}>
+      <View style={[styles.abilityContainer, { opacity: 0.5 }]}>
         <View style={{ width: firstColWidth }} />
         <View style={{ width: secondColWidth, alignItems: "center" }}>
           <Text>score</Text>
