@@ -22,7 +22,8 @@ export default class extends PureComponent<Props> {
     return (
       <View style={styles.container}>
         {actions.map(a => (
-          <TouchableOpacity onPress={a.callback}>
+          <TouchableOpacity style={styles.iconContainer} onPress={a.callback}>
+            {a.icon}
             <Text style={styles.text}>{a.text}</Text>
           </TouchableOpacity>
         ))}
@@ -43,7 +44,10 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   text: {
-    color: "white",
-    fontWeight: "bold"
+    color: "white"
+    // fontWeight: "bold"
+  },
+  iconContainer: {
+    alignItems: "center"
   }
 });

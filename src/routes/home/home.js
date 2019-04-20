@@ -1,10 +1,16 @@
 import React, { PureComponent } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
+import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { KeyValueService } from "api";
 import { Menu, ActionsBar, Text } from "components";
 import Abilities from "./abilities";
+
+const iconSize = 24;
+const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
+const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 
 type Props = {};
 
@@ -50,8 +56,8 @@ export default class App extends PureComponent<Props, State> {
   render() {
     const { abilities } = this.state;
     const actions = [
-      { text: "Load", callback: this.load },
-      { text: "Save", callback: this.save }
+      { text: "Load", callback: this.load, icon: loadIcon },
+      { text: "Save", callback: this.save, icon: saveIcon }
     ];
     return (
       <View style={styles.container}>
