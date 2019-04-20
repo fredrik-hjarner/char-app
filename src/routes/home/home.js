@@ -33,29 +33,19 @@ export default class App extends PureComponent<Props, State> {
 
   load = () =>
     KeyValueService.getValue("bruno/abilities")
-      .then(response => {
-        console.log("response:", response, "");
-        /* const abilities = JSON.parse(response);
-        console.log("abilities:", abilities, ""); */
-        this.setState({ abilities: response });
-      })
+      .then(response => this.setState({ abilities: response }))
       .catch(exception => console.log("exception:", exception, ""));
 
   save = () => {
-    KeyValueService.setValue(
-      "bruno/abilities",
-      JSON.stringify({
-        strength: 18,
-        dexterity: 1,
-        constitution: 1,
-        intelligence: 1,
-        wisdom: 1,
-        charisma: 1
-      })
-    )
+    if (!this.abilities) {
+      return;
+    }
+    KeyValueService.setValue("bruno/abilities", JSON.stringify(this.abilities))
       .then(() => console.log("saved!"))
       .catch(exception => console.log("exception:", exception, ""));
   };
+
+  handleAbilityChange = (abilities: object) => (this.abilities = abilities);
 
   render() {
     const { abilities } = this.state;
@@ -66,7 +56,7 @@ export default class App extends PureComponent<Props, State> {
     return (
       <View style={styles.container}>
         <Menu />
-        <Abilities {...abilities} />
+        <Abilities {...abilities} onChange={this.handleAbilityChange} />
         <ActionsBar actions={actions} />
       </View>
     );

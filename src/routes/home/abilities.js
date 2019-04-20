@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { View, TextInput } from "react-native";
 import { Button } from "react-native-paper";
 
@@ -16,10 +16,73 @@ type Props = {
   constitution: number,
   intelligence: number,
   wisdom: number,
+  charisma: number,
+
+  onChange: Function
+};
+
+type State = {
+  strength: number,
+  dexterity: number,
+  constitution: number,
+  intelligence: number,
+  wisdom: number,
   charisma: number
 };
 
-export default class App extends PureComponent<Props> {
+export default class App extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    const {
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma
+    } = props;
+    this.state = {
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // if I changed state dont overwrite them with props.
+    if (this.state === prevState) {
+      this.copyPropsToState();
+    }
+  }
+
+  copyPropsToState() {
+    const {
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma
+    } = this.props;
+    this.setState({
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma
+    });
+  }
+
+  changeAbility = (ability: string, value: string) => {
+    this.setState({ [ability]: value }, stuff =>
+      this.props.onChange(this.state)
+    );
+  };
+
   renderTableHeader() {
     return (
       <View style={[styles.abilityContainer, { opacity: 0.75 }]}>
@@ -43,8 +106,8 @@ export default class App extends PureComponent<Props> {
         <View style={styles.inputFieldContainer}>
           <TextInput
             keyboardType="numeric"
-            onChangeText={text => this.setState({ text })}
-            value={`${this.props[ability]}`}
+            onChangeText={text => this.changeAbility(ability, text)}
+            value={`${this.state[ability]}`}
           />
         </View>
         <View style={{ width: thirdColWidth, alignItems: "center" }}>
