@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, Text, View, TextInput } from "react-native";
+import { Platform, StyleSheet, View, TextInput } from "react-native";
 import { Button } from "react-native-paper";
 
 import { KeyValueService } from "api";
+import { Text } from "components";
 
 type Props = {};
 

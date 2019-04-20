@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 
 import { KeyValueService } from "api";
-import { Menu } from "components";
+import { Menu, Text } from "components";
 import Abilities from "./abilities";
 
 type Props = {};

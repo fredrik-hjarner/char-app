@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 
 import { Home } from "./src/routes";
