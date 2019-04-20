@@ -2,11 +2,17 @@ import { compose, createStore, combineReducers, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import { persistStore, persistReducer, createTransform } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import createSagaMiddleware from "redux-saga";
 
-import { reducer as characterReducer } from "./character";
+import {
+  reducer as characterReducer,
+  sagas as characterSagas
+} from "./character";
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
-const middleware = [];
+
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware];
 
 if (__DEV__) {
   middleware.push(createLogger({ collapsed: true }));
@@ -47,3 +53,5 @@ export const store = createStore(
 );
 
 export const persistor = persistStore(store);
+
+sagaMiddleware.run(characterSagas);

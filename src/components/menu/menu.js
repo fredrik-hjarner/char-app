@@ -5,7 +5,11 @@ import { connect } from "react-redux";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { Text } from "components";
-import { activeCharacterSelector, setActiveCharacter } from "redux/character";
+import {
+  activeCharacterSelector,
+  setActiveCharacter,
+  createNewCharacter
+} from "state-management/character";
 
 type Props = {
   navigation: object
@@ -17,11 +21,13 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setActiveCharacter }
+  { setActiveCharacter, createNewCharacter }
 )(
   withNavigation(
     class extends PureComponent<Props> {
       setActiveCharacter = () => this.props.setActiveCharacter("quinn");
+
+      createNewCharacter = () => this.props.createNewCharacter("quinn");
 
       renderCharacter() {
         const { activeCharacter } = this.props;
@@ -29,7 +35,7 @@ export default connect(
           <View style={styles.characterContainer}>
             <Text style={styles.text}>{activeCharacter}</Text>
             <View style={styles.actions}>
-              <TouchableOpacity onPress={this.setActiveCharacter}>
+              <TouchableOpacity onPress={this.createNewCharacter}>
                 <MaterialCommunityIcon
                   name="account-plus"
                   color="white"
