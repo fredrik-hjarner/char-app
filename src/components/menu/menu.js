@@ -52,6 +52,7 @@ export default connect(
       }
 
       renderRoutes() {
+        const { navigation } = this.props;
         return (
           <View style={styles.routesContainer}>
             <TouchableOpacity

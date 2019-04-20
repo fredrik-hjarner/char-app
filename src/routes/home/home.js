@@ -5,7 +5,8 @@ import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { KeyValueService } from "api";
-import { Menu, ActionsBar, Text } from "components";
+import { Menu, Text } from "components";
+import { LayoutWithFooter, LayoutWithHeader } from "layouts";
 import Abilities from "./abilities";
 
 const iconSize = 24;
@@ -60,17 +61,20 @@ export default class App extends PureComponent<Props, State> {
       { text: "Save", callback: this.save, icon: saveIcon }
     ];
     return (
-      <View style={styles.container}>
-        <Menu />
-        <Abilities {...abilities} onChange={this.handleAbilityChange} />
-        <ActionsBar actions={actions} />
-      </View>
+      <LayoutWithHeader>
+        <LayoutWithFooter actions={actions}>
+          <View style={styles.container}>
+            <Abilities {...abilities} onChange={this.handleAbilityChange} />
+          </View>
+        </LayoutWithFooter>
+      </LayoutWithHeader>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     justifyContent: "center",
     alignItems: "center"
   }
