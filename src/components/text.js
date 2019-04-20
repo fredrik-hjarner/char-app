@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Text } from "react-native";
 
+const minimumFontSize = 17;
+
 type Props = {
-  children: any
+  children: any,
+  style?: object
 };
 
 /**
@@ -12,7 +15,17 @@ type Props = {
  */
 export default class extends Component {
   render() {
-    const { children, ...props } = this.props;
-    return <Text {...props}>{children}</Text>;
+    const { children, style, ...props } = this.props;
+    let fontSize;
+    if (style?.fontSize) {
+      fontSize = Math.max(style?.fontSize, minimumFontSize);
+    } else {
+      fontSize = minimumFontSize;
+    }
+    return (
+      <Text {...props} style={[style, { fontSize }]}>
+        {children}
+      </Text>
+    );
   }
 }
