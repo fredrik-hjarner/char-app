@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, View } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { KeyValueService } from "api";
-import { Menu, Text } from "components";
 import { LayoutWithFooter, LayoutWithHeader } from "layouts";
 import { fetchAbilities, abilitiesSelector } from "state-management/abilities";
 import Abilities from "./abilities";
@@ -28,12 +26,12 @@ type Props = {
 };
 
 const mapStateToProps = state => ({
-  abilities: abilitiesSelector(state)
+  abilities: abilitiesSelector(state),
 });
 
 export default connect(
   mapStateToProps,
-  { fetchAbilities }
+  { fetchAbilities },
 )(
   class extends PureComponent<Props> {
     componentDidMount() {
@@ -46,7 +44,7 @@ export default connect(
       }
       KeyValueService.setValue(
         "bruno/abilities",
-        JSON.stringify(this.abilities)
+        JSON.stringify(this.abilities),
       )
         .then(() => console.log("saved!"))
         .catch(exception => console.log("exception:", exception, ""));
@@ -58,7 +56,7 @@ export default connect(
       const { abilities } = this.state;
       const actions = [
         { text: "Load", callback: () => {}, icon: loadIcon },
-        { text: "Save", callback: this.save, icon: saveIcon }
+        { text: "Save", callback: this.save, icon: saveIcon },
       ];
       return (
         <LayoutWithHeader>
@@ -70,13 +68,13 @@ export default connect(
         </LayoutWithHeader>
       );
     }
-  }
+  },
 );
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });

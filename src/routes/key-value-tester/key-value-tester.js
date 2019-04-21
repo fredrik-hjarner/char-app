@@ -19,10 +19,9 @@ export default class extends PureComponent<Props, State> {
     this.getAllKeys();
   }
 
-  getAllKeys = () =>
-    KeyValueService.getAllKeys()
-      .then(keys => this.setState({ keys }))
-      .catch(exception => console.log("exception:", exception, ""));
+  getAllKeys = () => KeyValueService.getAllKeys()
+    .then(keys => this.setState({ keys }))
+    .catch(exception => console.log("exception:", exception, ""));
 
   renderKeys() {
     const { keys } = this.state;
@@ -39,5 +38,5 @@ export default class extends PureComponent<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20 }
+  container: { padding: 20 },
 });

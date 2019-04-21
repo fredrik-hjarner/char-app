@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
 type Props = {
-  textInputStyle?: object
+  textInputStyle?: Object
 };
 
 export default class extends PureComponent<Props> {
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: "darkblue"
-  }
+    borderColor: "darkblue",
+  },
 });

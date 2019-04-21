@@ -5,7 +5,7 @@ const minimumFontSize = 17;
 
 type Props = {
   children: any,
-  style?: object
+  style?: Object
 };
 
 /**
@@ -13,7 +13,7 @@ type Props = {
  * 1) font sizes to be scaled depending on device/resolution etc.
  * 2) default props for text.
  */
-export default class extends Component {
+export default class extends Component<Props> {
   render() {
     const { children, style, ...props } = this.props;
     let fontSize;

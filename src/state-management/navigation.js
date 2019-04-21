@@ -17,7 +17,7 @@ type State = {
 
 const INITIAL_STATE: State = {
   currentRoute: "Home",
-  routeHistory: []
+  routeHistory: [],
 };
 
 /** *****************************************************************
@@ -30,7 +30,7 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
       return {
         ...state,
         currentRoute: action.payload.route,
-        routeHistory: [...state.routeHistory, action.payload.route]
+        routeHistory: [...state.routeHistory, action.payload.route],
       };
 
     case GO_BACK: {
@@ -38,7 +38,7 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
       return {
         ...state,
         currentRoute: last(routeHistory),
-        routeHistory
+        routeHistory,
       };
     }
 
@@ -53,7 +53,7 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
 
 export const pushRoute = (route: string) => ({
   type: PUSH_ROUTE,
-  payload: { route }
+  payload: { route },
 });
 
 export const goBack = () => ({ type: GO_BACK });
@@ -62,8 +62,7 @@ export const goBack = () => ({ type: GO_BACK });
     Selectors
 ****************************************************************** */
 
-export const currentRouteSelector = (state: Object): string =>
-  state.navigation.currentRoute;
+export const currentRouteSelector = (state: Object): string => state.navigation.currentRoute;
 
 /** *****************************************************************
     Sagas

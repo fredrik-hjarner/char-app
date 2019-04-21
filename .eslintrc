@@ -34,7 +34,9 @@
     "class-methods-use-this": 0,
     "camelcase": 0,
     "operator-linebreak": 0,
-    "react/jsx-one-expression-per-line": 0
+    "react/jsx-one-expression-per-line": 0,
+    "react/require-default-props": 0,
+    "quotes": ["error", "double"]
   },
   "settings": {
     "import/resolver": {

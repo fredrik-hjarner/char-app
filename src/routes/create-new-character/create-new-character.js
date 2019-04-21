@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 
 import { Text, TextInput } from "components";
-import { LayoutWithFooter, LayoutWithHeader } from "layouts";
+import { LayoutWithFooter } from "layouts";
 import { createNewCharacter } from "state-management/character";
 import { goBack } from "state-management/navigation";
 
@@ -26,7 +26,7 @@ type State = { characterName: string };
 
 export default connect(
   null,
-  { createNewCharacter, goBack }
+  { createNewCharacter, goBack },
 )(
   class extends PureComponent<Props, State> {
     state = { characterName: "" };
@@ -39,7 +39,7 @@ export default connect(
       const { characterName } = this.state;
       const actions = [
         { text: "Cancel", callback: this.cancel, icon: cancelIcon },
-        { text: "Create", callback: this.create, icon: createIcon }
+        { text: "Create", callback: this.create, icon: createIcon },
       ];
       return (
         <LayoutWithFooter actions={actions}>
@@ -54,13 +54,13 @@ export default connect(
         </LayoutWithFooter>
       );
     }
-  }
+  },
 );
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });

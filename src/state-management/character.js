@@ -24,7 +24,7 @@ type State = {
 
 const INITIAL_STATE: State = {
   activeCharacter: "bruno",
-  characterIndex: []
+  characterIndex: [],
 };
 
 /** *****************************************************************
@@ -36,13 +36,13 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
     case SET_ACTIVE_CHARACTER:
       return {
         ...state,
-        activeCharacter: action.payload.character
+        activeCharacter: action.payload.character,
       };
 
     case FETCH_CHARACTER_INDEX_SUCCESS:
       return {
         ...state,
-        characterIndex: action.payload.characters
+        characterIndex: action.payload.characters,
       };
 
     default:
@@ -56,27 +56,25 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
 
 export const setActiveCharacter = (character: string) => ({
   type: SET_ACTIVE_CHARACTER,
-  payload: { character }
+  payload: { character },
 });
 
 export const createNewCharacter = (characterName: string) => ({
   type: CREATE_NEW_CHARACTER_START,
-  payload: { characterName }
+  payload: { characterName },
 });
 
 export const fetchCharacterIndex = () => ({
-  type: FETCH_CHARACTER_INDEX_START
+  type: FETCH_CHARACTER_INDEX_START,
 });
 
 /** *****************************************************************
     Selectors
 ****************************************************************** */
 
-export const activeCharacterSelector = (state: Object): string =>
-  state.character.activeCharacter;
+export const activeCharacterSelector = (state: Object): string => state.character.activeCharacter;
 
-export const characterIndexSelector = (state: Object): [string] =>
-  state.character.characterIndex;
+export const characterIndexSelector = (state: Object): [string] => state.character.characterIndex;
 
 /** *****************************************************************
     Sagas
@@ -86,7 +84,7 @@ export function* createNewCharacterSaga({ payload: { characterName } }) {
   try {
     yield KeyValueService.setValue(
       `character-index/${characterName}`,
-      characterName
+      characterName,
     );
     yield put(fetchCharacterIndex());
     // TODO: should really have a timeout, so it wont wait forever.
@@ -100,7 +98,7 @@ export function* createNewCharacterSaga({ payload: { characterName } }) {
 
 export function* fetchCharacterIndexSaga() {
   const characters = yield KeyValueService.getKeysWithPrefix(
-    "character-index/"
+    "character-index/",
   );
 
   yield put({ type: FETCH_CHARACTER_INDEX_SUCCESS, payload: { characters } });
@@ -108,11 +106,11 @@ export function* fetchCharacterIndexSaga() {
 
 export function* sagas() {
   yield all([
-    (function*() {
+    (function* () {
       yield takeEvery(CREATE_NEW_CHARACTER_START, createNewCharacterSaga);
-    })(),
-    (function*() {
+    }()),
+    (function* () {
       yield takeEvery(FETCH_CHARACTER_INDEX_START, fetchCharacterIndexSaga);
-    })()
+    }()),
   ]);
 }

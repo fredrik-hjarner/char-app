@@ -10,12 +10,12 @@ export default StyleSheet.create({
     alignItems: "center" */
   },
   textInput: {
-    width: secondColWidth
+    width: secondColWidth,
   },
   abilityContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,
-    marginBottom: 5
-  }
+    marginBottom: 5,
+  },
 });

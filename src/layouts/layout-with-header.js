@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { Menu } from "components";
 
@@ -20,10 +20,10 @@ export default class extends PureComponent<Props> {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   childrenContainer: {
     width: "100%",
-    flex: 1
-  }
+    flex: 1,
+  },
 });
