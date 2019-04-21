@@ -20,6 +20,11 @@ export default class {
   static getKeysWithPrefix(prefix: string): Promise<[string]> {
     return axios
       .get(`http://localhost:8080/keys?prefix=${prefix}`)
-      .then(({ data }) => data || []);
+      .then(({ data }) => {
+        if (!data) {
+          return [];
+        }
+        return data.map(k => k.replace(new RegExp(`^${prefix}`), ""));
+      });
   }
 }

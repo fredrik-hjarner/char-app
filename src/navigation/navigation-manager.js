@@ -1,7 +1,12 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 
-import { Home, KeyValueTester, CreateNewCharacter } from "routes";
+import {
+  Home,
+  KeyValueTester,
+  CreateNewCharacter,
+  SwitchCharacter
+} from "routes";
 import { currentRouteSelector } from "state-management/navigation";
 
 type Props = {
@@ -25,6 +30,9 @@ export default connect(mapStateToProps)(
 
         case "CreateNewCharacter":
           return <CreateNewCharacter />;
+
+        case "SwitchCharacter":
+          return <SwitchCharacter />;
 
         default:
           return <Home />;

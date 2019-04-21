@@ -24,7 +24,7 @@ export default connect(
   { setActiveCharacter, createNewCharacter, pushRoute }
 )(
   class extends PureComponent<Props> {
-    setActiveCharacter = () => this.props.setActiveCharacter("quinn");
+    setActiveCharacter = () => this.props.pushRoute("SwitchCharacter"); //this.props.setActiveCharacter("quinn");
 
     createNewCharacter = () => this.props.pushRoute("CreateNewCharacter");
 

@@ -39,6 +39,12 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
         activeCharacter: action.payload.character
       };
 
+    case FETCH_CHARACTER_INDEX_SUCCESS:
+      return {
+        ...state,
+        characterIndex: action.payload.characters
+      };
+
     default:
       return state;
   }
@@ -96,9 +102,8 @@ export function* fetchCharacterIndexSaga() {
   const characters = yield KeyValueService.getKeysWithPrefix(
     "character-index/"
   );
-  console.log("characters:", characters, "");
 
-  yield put({ type: FETCH_CHARACTER_INDEX_SUCCESS });
+  yield put({ type: FETCH_CHARACTER_INDEX_SUCCESS, payload: { characters } });
 }
 
 export function* sagas() {
