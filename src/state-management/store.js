@@ -3,11 +3,16 @@ import { createLogger } from "redux-logger";
 import { persistStore, persistReducer, createTransform } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
+import { all } from "redux-saga/effects";
 
 import {
   reducer as characterReducer,
   sagas as characterSagas
 } from "./character";
+import {
+  reducer as abilitiesReducer,
+  sagas as abilitiesSagas
+} from "./abilities";
 import { reducer as navigationReducer } from "./navigation";
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
@@ -46,7 +51,8 @@ const persistConfig = {
 
 const reducers = combineReducers({
   character: characterReducer,
-  navigation: navigationReducer
+  navigation: navigationReducer,
+  abilities: abilitiesReducer
 });
 
 export const store = createStore(
@@ -56,4 +62,8 @@ export const store = createStore(
 
 export const persistor = persistStore(store);
 
-sagaMiddleware.run(characterSagas);
+function* rootSaga() {
+  yield all([characterSagas(), abilitiesSagas()]);
+}
+
+sagaMiddleware.run(rootSaga);
