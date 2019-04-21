@@ -1,6 +1,7 @@
 import { take, put, all, takeEvery } from "redux-saga/effects";
 
 import { KeyValueService } from "api";
+import { pushRoute } from "./navigation";
 
 /** *****************************************************************
     Constants
@@ -85,6 +86,7 @@ export function* createNewCharacterSaga({ payload: { characterName } }) {
     // TODO: should really have a timeout, so it wont wait forever.
     yield take(FETCH_CHARACTER_INDEX_SUCCESS);
     yield put(setActiveCharacter(characterName));
+    yield put(pushRoute("Home"));
   } catch (exception) {
     console.log("exception:", exception, "");
   }

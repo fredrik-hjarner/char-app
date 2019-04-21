@@ -8,6 +8,7 @@ import {
   reducer as characterReducer,
   sagas as characterSagas
 } from "./character";
+import { reducer as navigationReducer } from "./navigation";
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
 
@@ -44,7 +45,8 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  character: characterReducer
+  character: characterReducer,
+  navigation: navigationReducer
 });
 
 export const store = createStore(

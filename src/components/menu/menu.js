@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { withNavigation } from "react-navigation";
 import { connect } from "react-redux";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -10,9 +9,10 @@ import {
   setActiveCharacter,
   createNewCharacter
 } from "state-management/character";
+import { pushRoute } from "state-management/navigation";
 
 type Props = {
-  navigation: object
+  pushRoute: Function
 };
 
 const mapStateToProps = state => ({
@@ -21,70 +21,65 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setActiveCharacter, createNewCharacter }
+  { setActiveCharacter, createNewCharacter, pushRoute }
 )(
-  withNavigation(
-    class extends PureComponent<Props> {
-      setActiveCharacter = () => this.props.setActiveCharacter("quinn");
+  class extends PureComponent<Props> {
+    setActiveCharacter = () => this.props.setActiveCharacter("quinn");
 
-      createNewCharacter = () =>
-        this.props.navigation.navigate("CreateNewCharacter");
+    createNewCharacter = () => this.props.pushRoute("CreateNewCharacter");
 
-      renderCharacter() {
-        const { activeCharacter } = this.props;
-        return (
-          <View style={styles.characterContainer}>
-            <Text style={styles.text}>{activeCharacter}</Text>
-            <View style={styles.actions}>
-              <TouchableOpacity onPress={this.createNewCharacter}>
-                <MaterialCommunityIcon
-                  name="account-plus"
-                  color="white"
-                  size={30}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{ marginLeft: 30 }}
-                onPress={this.setActiveCharacter}
-              >
-                <MaterialCommunityIcon
-                  name="account-switch"
-                  color="white"
-                  size={24}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        );
-      }
-
-      renderRoutes() {
-        const { navigation } = this.props;
-        return (
-          <View style={styles.routesContainer}>
+    renderCharacter() {
+      const { activeCharacter } = this.props;
+      return (
+        <View style={styles.characterContainer}>
+          <Text style={styles.text}>{activeCharacter}</Text>
+          <View style={styles.actions}>
+            <TouchableOpacity onPress={this.createNewCharacter}>
+              <MaterialCommunityIcon
+                name="account-plus"
+                color="white"
+                size={30}
+              />
+            </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate("KeyValueTester")}
+              style={{ marginLeft: 30 }}
+              onPress={this.setActiveCharacter}
             >
-              <Text style={styles.text}>Key-value pairs</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-              <Text style={styles.text}>Character sheet</Text>
+              <MaterialCommunityIcon
+                name="account-switch"
+                color="white"
+                size={24}
+              />
             </TouchableOpacity>
           </View>
-        );
-      }
-
-      render() {
-        const { navigation } = this.props;
-        return (
-          <View style={styles.container}>
-            {this.renderCharacter()}
-            {this.renderRoutes()}
-          </View>
-        );
-      }
+        </View>
+      );
     }
-  )
+
+    renderRoutes() {
+      return (
+        <View style={styles.routesContainer}>
+          <TouchableOpacity
+            onPress={() => this.props.pushRoute("KeyValueTester")}
+          >
+            <Text style={styles.text}>Key-value pairs</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.pushRoute("Home")}>
+            <Text style={styles.text}>Character sheet</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+
+    render() {
+      return (
+        <View style={styles.container}>
+          {this.renderCharacter()}
+          {this.renderRoutes()}
+        </View>
+      );
+    }
+  }
 );
 
 const styles = StyleSheet.create({

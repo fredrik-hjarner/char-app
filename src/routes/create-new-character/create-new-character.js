@@ -7,6 +7,7 @@ import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 import { Text, TextInput } from "components";
 import { LayoutWithFooter, LayoutWithHeader } from "layouts";
 import { createNewCharacter } from "state-management/character";
+import { goBack } from "state-management/navigation";
 
 const iconSize = 24;
 const cancelIcon = (
@@ -17,19 +18,20 @@ const createIcon = (
 );
 
 type Props = {
-  navigation: object
+  createNewCharacter: Function,
+  goBack: Function
 };
 
 type State = { characterName: string };
 
 export default connect(
   null,
-  { createNewCharacter }
+  { createNewCharacter, goBack }
 )(
   class extends PureComponent<Props, State> {
     state = { characterName: "" };
 
-    cancel = () => this.props.navigation.goBack();
+    cancel = () => this.props.goBack();
 
     create = () => this.props.createNewCharacter(this.state.characterName);
 

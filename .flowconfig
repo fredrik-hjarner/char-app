@@ -1,23 +1,15 @@
 [ignore]
-; We fork some components by platform
-.*/*[.]android.js
+; Ignore node_modules
+node_modules
 
-; Ignore "BUCK" generated dirs
-<PROJECT_ROOT>/\.buckd/
+; Ignore android
+android
 
-; Ignore unexpected extra "@providesModule"
-.*/node_modules/.*/node_modules/fbjs/.*
+; Ignore ios
+ios
 
-; Ignore duplicate module providers
-; For RN Apps installed via npm, "Libraries" folder is inside
-; "node_modules/react-native" but in the source repo it is in the root
-.*/Libraries/react-native/React.js
-
-; Ignore polyfills
-.*/Libraries/polyfills/.*
-
-; Ignore metro
-.*/node_modules/metro/.*
+; Ignore __tests__
+__tests__
 
 [include]
 
@@ -64,6 +56,3 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(si
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
-
-[version]
-^0.97.0
