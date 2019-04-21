@@ -16,11 +16,6 @@ const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
 const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 
 type Props = {
-  abilities: object,
-  fetchAbilities: Function
-};
-
-type State = {
   abilities: {
     strength: number,
     dexterity: number,
@@ -28,7 +23,8 @@ type State = {
     intelligence: number,
     wisdom: number,
     charisma: number
-  }
+  },
+  fetchAbilities: Function
 };
 
 const mapStateToProps = state => ({
@@ -39,18 +35,7 @@ export default connect(
   mapStateToProps,
   { fetchAbilities }
 )(
-  class extends PureComponent<Props, State> {
-    state = {
-      abilities: {
-        strength: 1,
-        dexterity: 1,
-        constitution: 1,
-        intelligence: 1,
-        wisdom: 1,
-        charisma: 1
-      }
-    };
-
+  class extends PureComponent<Props> {
     componentDidMount() {
       this.props.fetchAbilities();
     }
