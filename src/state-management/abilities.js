@@ -64,7 +64,7 @@ export const abilitiesSelector = (state: Object): object =>
 ****************************************************************** */
 
 export function* fetchAbilitiesSaga() {
-  const activeCharacter = activeCharacterSelector(select());
+  const activeCharacter = yield select(activeCharacterSelector);
 
   const abilities = yield KeyValueService.getValue(
     `${activeCharacter}/abilities`
