@@ -18,35 +18,35 @@ export default class extends PureComponent<Props> {
     return (
       <InnerContainer>
         <Grid>
-          <Row width={7}>
+          <Row width={11}>
             <View>
               <P>Weapon name:</P>
               <TextInput style={{ width: 1000 }} />
             </View>
           </Row>
-          <Row width={1} />
-          <Row width={4}>
+          <Row />
+          <Row width={6}>
             <P>Type:</P>
             <TextInput />
           </Row>
         </Grid>
         <Padding />
         <Grid>
-          <Row width={2}>
+          <Row width={4}>
             <View>
               <P>Range:</P>
               <TextInput />
             </View>
           </Row>
-          <Row width={1} />
-          <Row width={4}>
+          <Row />
+          <Row width={6}>
             <View>
               <P>Attack bonus:</P>
               <TextInput />
             </View>
           </Row>
-          <Row width={1} />
-          <Row width={4}>
+          <Row />
+          <Row width={6}>
             <View>
               <P>Damage:</P>
               <TextInput />

@@ -54,10 +54,10 @@ export default connect(
           <H1>Armor class</H1>
           <Padding />
           <Grid>
-            <Row vc width={6}>
+            <Row vc width={9}>
               <Text>Total:</Text>
             </Row>
-            <Row width={6}>
+            <Row width={9}>
               <TextInput
                 onChangeText={characterName => this.setState({ characterName })}
                 value={`${totalAC}`}
@@ -75,10 +75,10 @@ export default connect(
           <H1>Hit points</H1>
           <Padding />
           <Grid>
-            <Row vc width={6}>
+            <Row vc width={9}>
               <Text>Max:</Text>
             </Row>
-            <Row width={6}>
+            <Row width={9}>
               <TextInput
                 onChangeText={characterName => this.setState({ characterName })}
                 value={`${maxHP}`}
@@ -87,10 +87,10 @@ export default connect(
           </Grid>
           <Padding />
           <Grid>
-            <Row vc width={6}>
+            <Row vc width={9}>
               <Text>Current:</Text>
             </Row>
-            <Row width={6}>
+            <Row width={9}>
               <TextInput
                 onChangeText={characterName => this.setState({ characterName })}
                 value={`${currentHP}`}
@@ -112,9 +112,9 @@ export default connect(
             <ScrollView>
               <Container>
                 <Grid>
-                  <Row width={5}>{this.renderHP()}</Row>
-                  <Row width={2} />
-                  <Row width={5}>{this.renderAC()}</Row>
+                  <Row width={8}>{this.renderHP()}</Row>
+                  <Row />
+                  <Row width={9}>{this.renderAC()}</Row>
                 </Grid>
                 <Weapons />
                 <FreeTextNotes />

@@ -8,7 +8,25 @@ export const Grid = ({ children, style, ...props }) => (
 );
 
 type RowProps = {
-  width: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
+  width:
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12
+    | 13
+    | 14
+    | 15
+    | 16
+    | 17
+    | 18,
   // vertically center content?
   vc?: boolean
 };
@@ -17,7 +35,7 @@ export const Row = ({ children, style, vc, width = 1, ...props }: RowProps) => (
   <View
     style={[
       styles.row,
-      { width: `${width * (100 / 12)}%` },
+      { width: `${width * (100 / 18)}%` },
       vc ? { alignItems: "center" } : undefined,
       style
     ]}
