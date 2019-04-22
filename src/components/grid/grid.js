@@ -13,7 +13,7 @@ type RowProps = {
   vc?: boolean
 };
 
-export const Row = ({ children, style, vc, width, ...props }: RowProps) => (
+export const Row = ({ children, style, vc, width = 1, ...props }: RowProps) => (
   <View
     style={[
       styles.row,

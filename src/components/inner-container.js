@@ -16,7 +16,7 @@ export default class extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    marginBottom: 30,
     width: "100%"
   }
 });

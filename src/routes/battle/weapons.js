@@ -2,11 +2,8 @@ import React, { PureComponent } from "react";
 import { View } from "react-native";
 
 import {
-  Text,
   P,
   H1,
-  Container,
-  FreeTextNotes,
   InnerContainer,
   Grid,
   Row,
@@ -19,7 +16,7 @@ type Props = {};
 export default class extends PureComponent<Props> {
   renderWeapon() {
     return (
-      <View>
+      <InnerContainer>
         <Grid>
           <Row width={7}>
             <View>
@@ -56,19 +53,18 @@ export default class extends PureComponent<Props> {
             </View>
           </Row>
         </Grid>
-      </View>
+      </InnerContainer>
     );
   }
 
   render() {
     return (
-      <InnerContainer>
+      <>
         <H1>Weapons</H1>
         <Padding />
         {this.renderWeapon()}
-        <Padding big />
         {this.renderWeapon()}
-      </InnerContainer>
+      </>
     );
   }
 }
