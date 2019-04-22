@@ -11,6 +11,10 @@ const FETCH_ABILITIES_START = "FETCH_ABILITIES_START";
 const FETCH_ABILITIES_SUCCESS = "FETCH_ABILITIES_SUCCESS";
 const FETCH_ABILITIES_ERROR = "FETCH_ABILITIES_ERROR";
 
+const SAVE_ABILITIES_START = "SAVE_ABILITIES_START";
+const SAVE_ABILITIES_SUCCESS = "SAVE_ABILITIES_SUCCESS";
+const SAVE_ABILITIES_ERROR = "SAVE_ABILITIES_ERROR";
+
 type State = {
   abilities: Object
 };
@@ -51,6 +55,11 @@ export const fetchAbilities = () => ({
   type: FETCH_ABILITIES_START
 });
 
+export const saveAbilities = (abilities: Object) => ({
+  type: SAVE_ABILITIES_START,
+  payload: { abilities }
+});
+
 /** *****************************************************************
     Selectors
 ****************************************************************** */
@@ -72,10 +81,22 @@ export function* fetchAbilitiesSaga() {
   yield put({ type: FETCH_ABILITIES_SUCCESS, payload: { abilities } });
 }
 
+export function* saveAbilitiesSaga(abilities: Object) {
+  const activeCharacter = yield select(activeCharacterSelector);
+
+  yield KeyValueService.setValue(`${activeCharacter}/abilities`, abilities);
+
+  yield put({ type: SAVE_ABILITIES_SUCCESS });
+  yield put(fetchAbilities());
+}
+
 export function* sagas() {
   yield all([
     (function*() {
       yield takeEvery(FETCH_ABILITIES_START, fetchAbilitiesSaga);
+    })(),
+    (function*() {
+      yield takeEvery(SAVE_ABILITIES_START, saveAbilitiesSaga);
     })()
   ]);
 }

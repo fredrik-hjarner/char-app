@@ -38,6 +38,10 @@ export default connect(
       this.props.fetchAbilities();
     }
 
+    load = () => {
+      this.props.fetchAbilities();
+    };
+
     save = () => {
       if (!this.abilities) {
         return;
@@ -53,9 +57,9 @@ export default connect(
     handleAbilityChange = (abilities: Object) => (this.abilities = abilities);
 
     render() {
-      const { abilities } = this.state;
+      const { abilities } = this.props;
       const actions = [
-        { text: "Load", callback: () => {}, icon: loadIcon },
+        { text: "Load", callback: this.load, icon: loadIcon },
         { text: "Save", callback: this.save, icon: saveIcon }
       ];
       return (
