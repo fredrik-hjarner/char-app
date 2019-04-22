@@ -82,7 +82,7 @@ export function* fetchAbilitiesSaga() {
    * TODO: This is quite ugly but check if no values was returned
    * and put in default props.
    */
-  if (!abilities.strength) {
+  if (!abilities?.strength) {
     abilities = {
       strength: 1,
       dexterity: 1,
