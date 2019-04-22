@@ -1,9 +1,8 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, View } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 
 import { KeyValueService } from "api";
-import { Menu, Text } from "components";
+import { Text } from "components";
 import { LayoutWithHeader } from "layouts";
 
 type Props = {};
@@ -19,9 +18,10 @@ export default class extends PureComponent<Props, State> {
     this.getAllKeys();
   }
 
-  getAllKeys = () => KeyValueService.getAllKeys()
-    .then(keys => this.setState({ keys }))
-    .catch(exception => console.log("exception:", exception, ""));
+  getAllKeys = () =>
+    KeyValueService.getAllKeys()
+      .then(keys => this.setState({ keys }))
+      .catch(exception => console.log("exception:", exception, ""));
 
   renderKeys() {
     const { keys } = this.state;
@@ -38,5 +38,5 @@ export default class extends PureComponent<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
+  container: { padding: 20 }
 });

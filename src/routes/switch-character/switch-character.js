@@ -1,15 +1,14 @@
 import React, { PureComponent } from "react";
-import { Platform, StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 
-import { Text, TextInput } from "components";
-import { LayoutWithFooter, LayoutWithHeader } from "layouts";
+import { Text } from "components";
+import { LayoutWithFooter } from "layouts";
 import {
-  createNewCharacter,
   fetchCharacterIndex,
   characterIndexSelector,
-  setActiveCharacter,
+  setActiveCharacter
 } from "state-management/character";
 import { goBack, pushRoute } from "state-management/navigation";
 
@@ -27,14 +26,14 @@ type Props = {
 };
 
 const mapStateToProps = state => ({
-  characterIndex: characterIndexSelector(state),
+  characterIndex: characterIndexSelector(state)
 });
 
 export default connect(
   mapStateToProps,
-  { goBack, pushRoute, fetchCharacterIndex, setActiveCharacter },
+  { goBack, pushRoute, fetchCharacterIndex, setActiveCharacter }
 )(
-  class extends PureComponent<Props, State> {
+  class extends PureComponent<Props> {
     componentDidMount() {
       this.props.fetchCharacterIndex();
     }
@@ -49,7 +48,7 @@ export default connect(
     render() {
       const { characterIndex } = this.props;
       const actions = [
-        { text: "Cancel", callback: this.cancel, icon: cancelIcon },
+        { text: "Cancel", callback: this.cancel, icon: cancelIcon }
       ];
       return (
         <LayoutWithFooter actions={actions}>
@@ -64,13 +63,13 @@ export default connect(
         </LayoutWithFooter>
       );
     }
-  },
+  }
 );
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
     justifyContent: "center",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 });

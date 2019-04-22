@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { View } from "react-native";
 
 import { Text, TextInput } from "components";
-import styles, { firstColWidth, secondColWidth } from "./styles/abilities";
+import styles, {
+  firstColWidth,
+  secondColWidth,
+  thirdColWidth
+} from "./styles/abilities";
 
 type Props = {
   strength: number,
@@ -33,7 +37,7 @@ export default class App extends Component<Props, State> {
       constitution,
       intelligence,
       wisdom,
-      charisma,
+      charisma
     } = props;
     this.state = {
       strength,
@@ -41,7 +45,7 @@ export default class App extends Component<Props, State> {
       constitution,
       intelligence,
       wisdom,
-      charisma,
+      charisma
     };
   }
 
@@ -59,7 +63,7 @@ export default class App extends Component<Props, State> {
       constitution,
       intelligence,
       wisdom,
-      charisma,
+      charisma
     } = this.props;
     this.setState({
       strength,
@@ -67,12 +71,12 @@ export default class App extends Component<Props, State> {
       constitution,
       intelligence,
       wisdom,
-      charisma,
+      charisma
     });
   }
 
   changeAbility = (ability: string, value: string) => {
-    this.setState({ [ability]: value }, stuff => this.props.onChange(this.state));
+    this.setState({ [ability]: value }, () => this.props.onChange(this.state));
   };
 
   renderTableHeader() {

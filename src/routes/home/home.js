@@ -26,12 +26,12 @@ type Props = {
 };
 
 const mapStateToProps = state => ({
-  abilities: abilitiesSelector(state),
+  abilities: abilitiesSelector(state)
 });
 
 export default connect(
   mapStateToProps,
-  { fetchAbilities },
+  { fetchAbilities }
 )(
   class extends PureComponent<Props> {
     componentDidMount() {
@@ -44,19 +44,19 @@ export default connect(
       }
       KeyValueService.setValue(
         "bruno/abilities",
-        JSON.stringify(this.abilities),
+        JSON.stringify(this.abilities)
       )
         .then(() => console.log("saved!"))
         .catch(exception => console.log("exception:", exception, ""));
     };
 
-    handleAbilityChange = (abilities: object) => (this.abilities = abilities);
+    handleAbilityChange = (abilities: Object) => (this.abilities = abilities);
 
     render() {
       const { abilities } = this.state;
       const actions = [
         { text: "Load", callback: () => {}, icon: loadIcon },
-        { text: "Save", callback: this.save, icon: saveIcon },
+        { text: "Save", callback: this.save, icon: saveIcon }
       ];
       return (
         <LayoutWithHeader>
@@ -68,13 +68,13 @@ export default connect(
         </LayoutWithHeader>
       );
     }
-  },
+  }
 );
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
     justifyContent: "center",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 });

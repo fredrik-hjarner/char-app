@@ -1,7 +1,6 @@
-import { take, put, all, takeEvery, select } from "redux-saga/effects";
+import { put, all, takeEvery, select } from "redux-saga/effects";
 
 import { KeyValueService } from "api";
-import { pushRoute } from "./navigation";
 import { activeCharacterSelector } from "./character";
 
 /** *****************************************************************
@@ -13,7 +12,7 @@ const FETCH_ABILITIES_SUCCESS = "FETCH_ABILITIES_SUCCESS";
 const FETCH_ABILITIES_ERROR = "FETCH_ABILITIES_ERROR";
 
 type State = {
-  abilities: object
+  abilities: Object
 };
 
 const INITIAL_STATE: State = {
@@ -23,8 +22,8 @@ const INITIAL_STATE: State = {
     constitution: 1,
     intelligence: 1,
     wisdom: 1,
-    charisma: 1,
-  },
+    charisma: 1
+  }
 };
 
 /** *****************************************************************
@@ -36,7 +35,7 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
     case FETCH_ABILITIES_SUCCESS:
       return {
         ...state,
-        abilities: action.payload.abilities,
+        abilities: action.payload.abilities
       };
 
     default:
@@ -49,14 +48,15 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
 ****************************************************************** */
 
 export const fetchAbilities = () => ({
-  type: FETCH_ABILITIES_START,
+  type: FETCH_ABILITIES_START
 });
 
 /** *****************************************************************
     Selectors
 ****************************************************************** */
 
-export const abilitiesSelector = (state: Object): object => state.abilities.abilities;
+export const abilitiesSelector = (state: Object): Object =>
+  state.abilities.abilities;
 
 /** *****************************************************************
     Sagas
@@ -66,7 +66,7 @@ export function* fetchAbilitiesSaga() {
   const activeCharacter = yield select(activeCharacterSelector);
 
   const abilities = yield KeyValueService.getValue(
-    `${activeCharacter}/abilities`,
+    `${activeCharacter}/abilities`
   );
 
   yield put({ type: FETCH_ABILITIES_SUCCESS, payload: { abilities } });
@@ -74,8 +74,8 @@ export function* fetchAbilitiesSaga() {
 
 export function* sagas() {
   yield all([
-    (function* () {
+    (function*() {
       yield takeEvery(FETCH_ABILITIES_START, fetchAbilitiesSaga);
-    }()),
+    })()
   ]);
 }
