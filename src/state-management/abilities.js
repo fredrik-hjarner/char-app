@@ -74,9 +74,24 @@ export const abilitiesSelector = (state: Object): Object =>
 export function* fetchAbilitiesSaga() {
   const activeCharacter = yield select(activeCharacterSelector);
 
-  const abilities = yield KeyValueService.getValue(
+  let abilities = yield KeyValueService.getValue(
     `${activeCharacter}/abilities`
   );
+
+  /**
+   * TODO: This is quite ugly but check if no values was returned
+   * and put in default props.
+   */
+  if (!abilities.strength) {
+    abilities = {
+      strength: 1,
+      dexterity: 1,
+      constitution: 1,
+      intelligence: 1,
+      wisdom: 1,
+      charisma: 1
+    };
+  }
 
   yield put({ type: FETCH_ABILITIES_SUCCESS, payload: { abilities } });
 }
