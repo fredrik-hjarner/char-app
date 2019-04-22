@@ -6,6 +6,7 @@ import {
   KeyValueTester,
   CreateNewCharacter,
   SwitchCharacter,
+  Battle
 } from "routes";
 import { currentRouteSelector } from "state-management/navigation";
 
@@ -14,7 +15,7 @@ type Props = {
 };
 
 const mapStateToProps = state => ({
-  currentRoute: currentRouteSelector(state),
+  currentRoute: currentRouteSelector(state)
 });
 
 export default connect(mapStateToProps)(
@@ -34,9 +35,12 @@ export default connect(mapStateToProps)(
         case "SwitchCharacter":
           return <SwitchCharacter />;
 
+        case "Battle":
+          return <Battle />;
+
         default:
           return <Home />;
       }
     }
-  },
+  }
 );

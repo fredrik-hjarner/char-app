@@ -13,7 +13,7 @@ type State = {
 };
 
 const INITIAL_STATE: State = {
-  currentRoute: "Home",
+  currentRoute: "Battle",
   routeHistory: []
 };
 

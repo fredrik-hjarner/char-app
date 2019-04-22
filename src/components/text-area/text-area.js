@@ -10,7 +10,12 @@ export default class extends PureComponent<Props> {
     const { style, textInputStyle, ...props } = this.props;
     return (
       <View style={[styles.inputFieldContainer, style]}>
-        <TextInput style={[styles.textInput, textInputStyle]} {...props} />
+        <TextInput
+          multiline
+          numberOfLines={4}
+          style={[styles.textInput, textInputStyle]}
+          {...props}
+        />
       </View>
     );
   }
@@ -18,8 +23,6 @@ export default class extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
   inputFieldContainer: {
-    width: 200,
-    maxWidth: "100%",
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderWidth: 1,
@@ -27,6 +30,7 @@ const styles = StyleSheet.create({
     borderColor: "darkblue"
   },
   textInput: {
+    textAlignVertical: "top",
     padding: 0,
     fontSize: 17 // TODO: import default fontSize
   }

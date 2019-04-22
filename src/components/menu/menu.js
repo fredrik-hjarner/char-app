@@ -7,7 +7,7 @@ import { Text } from "components";
 import {
   activeCharacterSelector,
   setActiveCharacter,
-  createNewCharacter,
+  createNewCharacter
 } from "state-management/character";
 import { pushRoute } from "state-management/navigation";
 
@@ -16,12 +16,12 @@ type Props = {
 };
 
 const mapStateToProps = state => ({
-  activeCharacter: activeCharacterSelector(state),
+  activeCharacter: activeCharacterSelector(state)
 });
 
 export default connect(
   mapStateToProps,
-  { setActiveCharacter, createNewCharacter, pushRoute },
+  { setActiveCharacter, createNewCharacter, pushRoute }
 )(
   class extends PureComponent<Props> {
     setActiveCharacter = () => this.props.pushRoute("SwitchCharacter"); // this.props.setActiveCharacter("quinn");
@@ -62,10 +62,13 @@ export default connect(
           <TouchableOpacity
             onPress={() => this.props.pushRoute("KeyValueTester")}
           >
-            <Text style={styles.text}>Key-value pairs</Text>
+            <Text style={styles.text}>K-v-pairs</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.pushRoute("Home")}>
-            <Text style={styles.text}>Character sheet</Text>
+            <Text style={styles.text}>Abilities</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.pushRoute("Battle")}>
+            <Text style={styles.text}>Battle</Text>
           </TouchableOpacity>
         </View>
       );
@@ -79,12 +82,12 @@ export default connect(
         </View>
       );
     }
-  },
+  }
 );
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "100%"
   },
   routesContainer: {
     flexDirection: "row",
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 10
   },
   characterContainer: {
     flexDirection: "row",
@@ -105,15 +108,15 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
     paddingTop: 6,
-    paddingBottom: 6,
+    paddingBottom: 6
   },
   text: {
     color: "white",
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   actions: {
     flexDirection: "row",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 });

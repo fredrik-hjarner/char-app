@@ -8,7 +8,8 @@
     "lint": "node_modules/.bin/eslint src/",
     "clean": "rimraf '{build,.jest,ios/build,android/build}'",
     "clean:all": "yarn clean && rimraf {node_modules,./gems,ios/Pods,android/.gradle}",
-    "purge": "yarn clean:all && yarn"
+    "purge": "yarn clean:all && yarn",
+    "rn": "react-native run-android"
   },
   "dependencies": {
     "axios": "^0.18.0",

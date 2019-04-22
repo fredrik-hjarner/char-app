@@ -23,7 +23,7 @@ export default class extends Component<Props> {
       fontSize = minimumFontSize;
     }
     return (
-      <Text {...props} style={[{ color: "black" }, style, { fontSize }]}>
+      <Text style={[{ color: "black" }, style, { fontSize }]} {...props}>
         {children}
       </Text>
     );
