@@ -6,5 +6,6 @@ export { default as TextArea } from "./text-area";
 export { default as Container } from "./container";
 export { default as InnerContainer } from "./inner-container";
 export { default as FreeTextNotes } from "./free-text-notes";
+export { default as HR } from "./hr";
 export * from "./grid";
 export * from "./typography";

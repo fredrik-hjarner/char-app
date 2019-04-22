@@ -12,7 +12,7 @@ export default class extends PureComponent<Props> {
       <View style={[styles.inputFieldContainer, style]}>
         <TextInput
           multiline
-          numberOfLines={4}
+          numberOfLines={5}
           style={[styles.textInput, textInputStyle]}
           {...props}
         />

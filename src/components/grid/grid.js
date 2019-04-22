@@ -28,12 +28,17 @@ export const Row = ({ children, style, vc, width, ...props }: RowProps) => (
 );
 
 // TODO: This should perhaps be moved to better suiting file.
-export const Padding = () => <View style={styles.padding} />;
+export const Padding = ({ big }) => (
+  <View style={big ? styles.paddingBig : styles.padding} />
+);
 
 const styles = StyleSheet.create({
   grid: { flexDirection: "row", flexWrap: "wrap" },
   row: { flexDirection: "row", flexWrap: "wrap" },
   padding: {
     height: 5
+  },
+  paddingBig: {
+    height: 30
   }
 });

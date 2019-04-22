@@ -8,7 +8,7 @@ export default class extends PureComponent<Props> {
   render() {
     return (
       <InnerContainer>
-        <H1>Free text/notes:</H1>
+        <H1>Free text/notes</H1>
         <Padding />
         <TextArea />
       </InnerContainer>

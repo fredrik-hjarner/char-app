@@ -7,13 +7,15 @@ import { all } from "redux-saga/effects";
 
 import {
   reducer as characterReducer,
-  sagas as characterSagas,
+  sagas as characterSagas
 } from "./character";
 import {
   reducer as abilitiesReducer,
-  sagas as abilitiesSagas,
+  sagas as abilitiesSagas
 } from "./abilities";
 import { reducer as navigationReducer } from "./navigation";
+import { reducer as hpReducer, sagas as hpSagas } from "./hp";
+import { reducer as acReducer, sagas as acSagas } from "./ac";
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
 
@@ -25,45 +27,47 @@ if (__DEV__) {
 }
 
 const transformImages = createTransform(
-  (inboundState) => {
+  inboundState => {
     if (!inboundState) {
       return {};
     }
     return inboundState;
   },
 
-  (outboundState) => {
+  outboundState => {
     if (!outboundState) {
       return {};
     }
     return outboundState;
   },
 
-  { whitelist: ["images"] },
+  { whitelist: ["images"] }
 );
 
 const persistConfig = {
   transforms: [transformImages],
   key: "root",
   storage,
-  whitelist: ["images"],
+  whitelist: ["images"]
 };
 
 const reducers = combineReducers({
   character: characterReducer,
   navigation: navigationReducer,
   abilities: abilitiesReducer,
+  hp: hpReducer,
+  ac: acReducer
 });
 
 export const store = createStore(
   persistReducer(persistConfig, reducers),
-  enhancer(applyMiddleware(...middleware)),
+  enhancer(applyMiddleware(...middleware))
 );
 
 export const persistor = persistStore(store);
 
 function* rootSaga() {
-  yield all([characterSagas(), abilitiesSagas()]);
+  yield all([characterSagas(), abilitiesSagas(), hpSagas(), acSagas()]);
 }
 
 sagaMiddleware.run(rootSaga);
