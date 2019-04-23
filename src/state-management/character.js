@@ -2,6 +2,9 @@ import { take, put, all, takeEvery } from "redux-saga/effects";
 
 import { KeyValueService } from "api";
 import { pushRoute } from "./navigation";
+import { saveAbilities } from "./abilities";
+import { saveHP } from "./hp";
+import { saveAC } from "./ac";
 
 /** *****************************************************************
     Constants
@@ -91,7 +94,39 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
     yield put(fetchCharacterIndex());
     // TODO: should really have a timeout, so it wont wait forever.
     yield take(FETCH_CHARACTER_INDEX_SUCCESS);
+
     yield put(setActiveCharacter(characterName));
+
+    // Create default abilities
+    yield put(
+      saveAbilities({
+        strength: 1,
+        dexterity: 1,
+        constitution: 1,
+        intelligence: 1,
+        wisdom: 1,
+        charisma: 1
+      })
+    );
+
+    // Create default hp
+    yield put(
+      saveHP({
+        maxHP: 0,
+        currentHP: 0
+      })
+    );
+
+    // Create default ac
+    yield put(
+      saveAC({
+        ac: 10
+      })
+    );
+
+    // Create default weapons
+    // yield put(createDefaultWeapons(characterName));
+
     yield put(pushRoute("Home"));
   } catch (exception) {
     console.log("exception:", exception, "");

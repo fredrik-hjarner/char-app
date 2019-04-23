@@ -14,7 +14,7 @@ const cancelIcon = (
   <SimpleLineIconsIcon name="action-undo" color="white" size={iconSize} />
 );
 const createIcon = (
-  <FontAwesome5Icon name="save" color="white" size={iconSize} />
+  <FontAwesome5Icon name="account-plus" color="white" size={iconSize} />
 );
 
 type Props = {

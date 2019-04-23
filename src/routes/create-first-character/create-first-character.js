@@ -10,7 +10,7 @@ import { goBack } from "state-management/navigation";
 
 const iconSize = 24;
 const createIcon = (
-  <FontAwesome5Icon name="save" color="white" size={iconSize} />
+  <FontAwesome5Icon name="account-plus" color="white" size={iconSize} />
 );
 
 type Props = {
