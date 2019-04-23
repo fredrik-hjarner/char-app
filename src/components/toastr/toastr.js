@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Banner } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
+import { P } from "components";
 import {
   getToastr,
   TOASTR_SUCCESS,
@@ -54,18 +54,11 @@ export default connect(mapStateToProps)(
       }
 
       const { type, text } = toastr;
-      console.log("toastr!!!!");
 
       return (
-        <View style={{ position: "absolute", top: 0, width: "100%", left: 0 }}>
-          <Banner
-            style={this.getToastrStyle(type)}
-            visible
-            actions={[]}
-            image={() => this.renderIcon(type)}
-          >
-            <Text style={styles.text}>{text}</Text>
-          </Banner>
+        <View style={[styles.toastr, this.getToastrStyle(type)]}>
+          {this.renderIcon(type)}
+          <P style={styles.text}>{text}</P>
         </View>
       );
     }
@@ -73,6 +66,14 @@ export default connect(mapStateToProps)(
 );
 
 const styles = StyleSheet.create({
+  toastr: {
+    flexDirection: "row",
+    padding: 10,
+    position: "absolute",
+    top: 0,
+    width: "100%",
+    left: 0
+  },
   success: {
     backgroundColor: "rgb(80,200,80)",
     position: "absolute",
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   text: {
-    fontSize: 16,
+    marginLeft: 10,
     textAlignVertical: "center"
   }
 });

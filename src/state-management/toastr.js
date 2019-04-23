@@ -81,7 +81,7 @@ export const reducer = (state: State = INITIAL_STATE, action: Action) => {
 ****************************************************************** */
 
 function* closeToastrSaga() {
-  yield delay(5000);
+  yield delay(8000);
   yield put(closeToastr());
 }
 
