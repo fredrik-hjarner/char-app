@@ -6,6 +6,7 @@ import {
   Home,
   KeyValueTester,
   CreateNewCharacter,
+  CreateFirstCharacter,
   SwitchCharacter,
   Battle
 } from "routes";
@@ -33,6 +34,9 @@ export default connect(mapStateToProps)(
 
         case "CreateNewCharacter":
           return <CreateNewCharacter />;
+
+        case "CreateFirstCharacter":
+          return <CreateFirstCharacter />;
 
         case "SwitchCharacter":
           return <SwitchCharacter />;

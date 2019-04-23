@@ -99,11 +99,23 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
 }
 
 function* fetchCharacterIndexSaga() {
-  const characters = yield KeyValueService.getKeysWithPrefix(
-    "character-index/"
-  );
+  try {
+    const characters = yield KeyValueService.getKeysWithPrefix(
+      "character-index/"
+    );
 
-  yield put({ type: FETCH_CHARACTER_INDEX_SUCCESS, payload: { characters } });
+    if (characters.length === 0) {
+      yield put(pushRoute("CreateFirstCharacter"));
+    } else {
+      yield put({
+        type: FETCH_CHARACTER_INDEX_SUCCESS,
+        payload: { characters }
+      });
+    }
+  } catch {
+    yield put({ type: FETCH_CHARACTER_INDEX_ERROR });
+    yield put(pushRoute("CreateFirstCharacter"));
+  }
 }
 
 export function* sagas() {

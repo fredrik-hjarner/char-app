@@ -5,8 +5,8 @@ type Props = { children: any };
 
 export default class extends PureComponent<Props> {
   render() {
-    const { children } = this.props;
-    return <View style={styles.container}>{children}</View>;
+    const { style, children } = this.props;
+    return <View style={[styles.container, style]}>{children}</View>;
   }
 }
 
