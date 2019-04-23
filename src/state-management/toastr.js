@@ -21,10 +21,12 @@ type Action = {
 };
 
 type State = {
-  toastr: {
-    text: string,
-    type?: string
-  } | null
+  toastr: [
+    {
+      text: string,
+      type?: string
+    }
+  ]
 };
 
 type Payload = {
@@ -47,30 +49,27 @@ export const closeToastr = () => ({ type: CLOSE_TOASTR });
 // Selectors
 // ------------------------------------
 
-export const getToastr = state => state.toastr.toastr;
+export const getToastrs = (state: Object): [Object] => state.toastr.toastr;
 
 // ------------------------------------
 // Reducers
 // ------------------------------------
 
 const INITIAL_STATE: State = {
-  /**
-   * null indicates there is no toastr
-   * that is that the toastr is closed.
-   */
-  toastr: null
+  toastr: []
 };
 
 export const reducer = (state: State = INITIAL_STATE, action: Action) => {
   switch (action.type) {
     case OPEN_TOASTR: {
       const { text, type } = action.payload;
-      return { toastr: { text, type } };
+      return { toastr: [...state.toastr, { text, type }] };
     }
 
-    case CLOSE_TOASTR:
-      return INITIAL_STATE;
-
+    case CLOSE_TOASTR: {
+      const [_, ...toastr] = state.toastr;
+      return { toastr };
+    }
     default:
       return state;
   }
