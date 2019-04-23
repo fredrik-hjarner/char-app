@@ -1,9 +1,14 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
+import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { KeyValueService } from "api";
-import { Text } from "components";
-import { LayoutWithHeader } from "layouts";
+import { Text, H1, Container, Padding } from "components";
+import { LayoutWithHeader, LayoutWithFooter } from "layouts";
+
+const iconSize = 24;
+const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
+const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 
 type Props = {};
 
@@ -18,6 +23,16 @@ export default class extends PureComponent<Props, State> {
     this.getAllKeys();
   }
 
+  deleteOneValue = () =>
+    KeyValueService.deleteOneValue("bruno/abilities")
+      .then(this.getAllKeys)
+      .catch(exception => console.log("exception:", exception, ""));
+
+  deleteAllValues = () =>
+    KeyValueService.deleteAllValues()
+      .then(this.getAllKeys)
+      .catch(exception => console.log("exception:", exception, ""));
+
   getAllKeys = () =>
     KeyValueService.getAllKeys()
       .then(keys => this.setState({ keys }))
@@ -25,18 +40,25 @@ export default class extends PureComponent<Props, State> {
 
   renderKeys() {
     const { keys } = this.state;
-    return keys.map(k => <Text>{k}</Text>);
+    return keys.map(k => <Text>* {k}</Text>);
   }
 
   render() {
+    const actions = [
+      { text: "New value", callback: this.createValue, icon: loadIcon },
+      { text: "Delete", callback: this.deleteOneValue, icon: loadIcon },
+      { text: "Clear", callback: this.deleteAllValues, icon: saveIcon }
+    ];
     return (
       <LayoutWithHeader>
-        <View style={styles.container}>{this.renderKeys()}</View>
+        <LayoutWithFooter actions={actions}>
+          <Container>
+            <H1>List of all keys</H1>
+            <Padding />
+            {this.renderKeys()}
+          </Container>
+        </LayoutWithFooter>
       </LayoutWithHeader>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: { padding: 20 }
-});

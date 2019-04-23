@@ -11,7 +11,7 @@ import {
   Padding
 } from "components";
 
-type Props = {};
+type Props = { weapons: [Object] };
 
 export default class extends PureComponent<Props> {
   renderWeapon() {
@@ -58,6 +58,7 @@ export default class extends PureComponent<Props> {
   }
 
   render() {
+    const { weapons } = this.props;
     return (
       <>
         <H1>Weapons</H1>

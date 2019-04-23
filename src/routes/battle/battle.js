@@ -18,6 +18,7 @@ import {
 } from "components";
 import { fetchHP, maxHPSelector, currentHPSelector } from "state-management/hp";
 import { fetchAC, totalACSelector } from "state-management/ac";
+import { fetchWeapons, weaponsSelector } from "state-management/weapons";
 import Weapons from "./weapons";
 
 const iconSize = 24;
@@ -28,23 +29,26 @@ type Props = {
   maxHP: number,
   currentHP: number,
   fetchHP: Function,
-  fetchAC: Function
+  fetchAC: Function,
+  fetchWeapons: Function
 };
 
 const mapStateToProps = state => ({
   maxHP: maxHPSelector(state),
   currentHP: currentHPSelector(state),
-  totalAC: totalACSelector(state)
+  totalAC: totalACSelector(state),
+  weapons: weaponsSelector(state)
 });
 
 export default connect(
   mapStateToProps,
-  { fetchHP, fetchAC }
+  { fetchHP, fetchAC, fetchWeapons }
 )(
   class extends PureComponent<Props> {
     componentDidMount() {
       this.props.fetchHP();
       this.props.fetchAC();
+      this.props.fetchWeapons();
     }
 
     renderAC() {
@@ -102,6 +106,7 @@ export default connect(
     }
 
     render() {
+      const { weapons } = this.props;
       const actions = [
         { text: "Load", callback: this.load, icon: loadIcon },
         { text: "Save", callback: this.save, icon: saveIcon }
@@ -116,7 +121,7 @@ export default connect(
                   <Row />
                   <Row width={9}>{this.renderAC()}</Row>
                 </Grid>
-                <Weapons />
+                <Weapons weapons={weapons} />
                 <FreeTextNotes />
               </Container>
             </ScrollView>

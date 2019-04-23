@@ -8,22 +8,43 @@ import { openToastr, TOASTR_ERROR } from "./toastr";
     Constants
 ****************************************************************** */
 
-const FETCH_HP_START = "FETCH_HP_START";
-const FETCH_HP_SUCCESS = "FETCH_HP_SUCCESS";
-const FETCH_HP_ERROR = "FETCH_HP_ERROR";
+const FETCH_WEAPONS_START = "FETCH_WEAPONS_START";
+const FETCH_WEAPONS_SUCCESS = "FETCH_WEAPONS_SUCCESS";
+const FETCH_WEAPONS_ERROR = "FETCH_WEAPONS_ERROR";
 
-const SAVE_HP_START = "SAVE_HP_START";
-const SAVE_HP_SUCCESS = "SAVE_HP_SUCCESS";
-const SAVE_HP_ERROR = "SAVE_HP_ERROR";
+const SAVE_WEAPONS_START = "SAVE_WEAPONS_START";
+const SAVE_WEAPONS_SUCCESS = "SAVE_WEAPONS_SUCCESS";
+const SAVE_WEAPONS_ERROR = "SAVE_WEAPONS_ERROR";
+
+type Weapon = {
+  weapon: string,
+  type: string,
+  range: string,
+  attackBonus: string,
+  damage: string
+};
 
 type State = {
-  maxHP: number,
-  currentHP: number
+  weapons: [Weapon]
 };
 
 const INITIAL_STATE: State = {
-  maxHP: 0,
-  currentHP: 0
+  weapons: [
+    {
+      weapon: "Longsword",
+      type: "Martial",
+      range: "Melee",
+      attackBonus: "+4",
+      damage: "1d8+2"
+    },
+    {
+      weapon: "Longsword",
+      type: "Martial",
+      range: "Melee",
+      attackBonus: "+4",
+      damage: "1d8+2"
+    }
+  ]
 };
 
 /** *****************************************************************
@@ -32,7 +53,7 @@ const INITIAL_STATE: State = {
 
 export const reducer = (state: State = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_HP_SUCCESS:
+    case FETCH_WEAPONS_SUCCESS:
       return {
         ...state,
         ...action.payload.hp
@@ -47,12 +68,12 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
     Actions
 ****************************************************************** */
 
-export const fetchHP = () => ({
-  type: FETCH_HP_START
+export const fetchWeapons = () => ({
+  type: FETCH_WEAPONS_START
 });
 
-export const saveHP = (hp: Object) => ({
-  type: SAVE_HP_START,
+export const saveWeapons = (hp: Object) => ({
+  type: SAVE_WEAPONS_START,
   payload: { hp }
 });
 
@@ -60,56 +81,52 @@ export const saveHP = (hp: Object) => ({
     Selectors
 ****************************************************************** */
 
-export const maxHPSelector = (state: Object): Object => state.hp.maxHP;
-export const currentHPSelector = (state: Object): Object => state.hp.currentHP;
+export const weaponsSelector = (state: Object): Object => state.weapons.weapons;
 
 /** *****************************************************************
     Sagas
 ****************************************************************** */
 
-export function* fetchHPSaga() {
+export function* fetchWeaponsSaga() {
   const activeCharacter = yield select(activeCharacterSelector);
 
   try {
-    console.log("fetchHPSaga: try:");
-    let hp = yield KeyValueService.getValue(`${activeCharacter}/hp`);
-    console.log("fetchHPSaga: after yield promise:");
+    let weapons = yield KeyValueService.getValue(`${activeCharacter}/hp`);
 
     /**
      * TODO: This is quite ugly but check if no values was returned
      * and put in default props.
      */
-    if (!hp?.maxHP) {
-      hp = {
+    if (!weapons?.weapons) {
+      weapons = {
         maxHP: 0,
         currentHP: 0
       };
     }
 
-    yield put({ type: FETCH_HP_SUCCESS, payload: { hp } });
+    yield put({ type: FETCH_WEAPONS_SUCCESS, payload: { weapons } });
   } catch (exception) {
-    console.log("fetchHPSaga: catch:");
-    yield put({ type: FETCH_HP_ERROR });
+    yield put({ type: FETCH_WEAPONS_ERROR });
     yield put(openToastr({ text: `${exception}`, type: TOASTR_ERROR }));
   }
 }
 
-export function* saveHPSaga(hp: Object) {
+export function* saveWeaponsSaga(hp: Object) {
   const activeCharacter = yield select(activeCharacterSelector);
 
   yield KeyValueService.setValue(`${activeCharacter}/hp`, hp);
 
-  yield put({ type: SAVE_HP_SUCCESS });
-  yield put(fetchHP());
+  yield put({ type: SAVE_WEAPONS_SUCCESS });
+  yield put(fetchWeapons());
 }
 
 export function* sagas() {
   yield all([
     (function*() {
-      yield takeEvery(FETCH_HP_START, fetchHPSaga);
+      yield takeEvery(FETCH_WEAPONS_START, fetchWeaponsSaga);
     })(),
     (function*() {
-      yield takeEvery(SAVE_HP_START, saveHPSaga);
+      yield takeEvery(SAVE_WEAPONS_START, saveWeaponsSaga);
     })()
   ]);
 }

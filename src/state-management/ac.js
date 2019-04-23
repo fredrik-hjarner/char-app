@@ -2,6 +2,7 @@ import { put, all, takeEvery, select } from "redux-saga/effects";
 
 import { KeyValueService } from "api";
 import { activeCharacterSelector } from "./character";
+import { openToastr, TOASTR_ERROR } from "./toastr";
 
 /** *****************************************************************
     Constants
@@ -66,19 +67,24 @@ export const totalACSelector = (state: Object): Object => state.ac.ac;
 export function* fetchACSaga() {
   const activeCharacter = yield select(activeCharacterSelector);
 
-  let ac = yield KeyValueService.getValue(`${activeCharacter}/ac`);
+  try {
+    let ac = yield KeyValueService.getValue(`${activeCharacter}/ac`);
 
-  /**
-   * TODO: This is quite ugly but check if no values was returned
-   * and put in default props.
-   */
-  if (!ac?.ac) {
-    ac = {
-      ac: 10
-    };
+    /**
+     * TODO: This is quite ugly but check if no values was returned
+     * and put in default props.
+     */
+    if (!ac?.ac) {
+      ac = {
+        ac: 10
+      };
+    }
+
+    yield put({ type: FETCH_AC_SUCCESS, payload: { ac } });
+  } catch (exception) {
+    yield put({ type: FETCH_AC_ERROR });
+    yield put(openToastr({ text: `${exception}`, type: TOASTR_ERROR }));
   }
-
-  yield put({ type: FETCH_AC_SUCCESS, payload: { ac } });
 }
 
 export function* saveACSaga(ac: Object) {

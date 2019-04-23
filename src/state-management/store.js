@@ -16,6 +16,8 @@ import {
 import { reducer as navigationReducer } from "./navigation";
 import { reducer as hpReducer, sagas as hpSagas } from "./hp";
 import { reducer as acReducer, sagas as acSagas } from "./ac";
+import { reducer as weaponsReducer, sagas as weaponsSagas } from "./weapons";
+import { reducer as toastrReducer, sagas as toastrSagas } from "./toastr";
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
 
@@ -56,7 +58,9 @@ const reducers = combineReducers({
   navigation: navigationReducer,
   abilities: abilitiesReducer,
   hp: hpReducer,
-  ac: acReducer
+  ac: acReducer,
+  weapons: weaponsReducer,
+  toastr: toastrReducer
 });
 
 export const store = createStore(
@@ -67,7 +71,14 @@ export const store = createStore(
 export const persistor = persistStore(store);
 
 function* rootSaga() {
-  yield all([characterSagas(), abilitiesSagas(), hpSagas(), acSagas()]);
+  yield all([
+    characterSagas(),
+    abilitiesSagas(),
+    hpSagas(),
+    acSagas(),
+    weaponsSagas(),
+    toastrSagas()
+  ]);
 }
 
 sagaMiddleware.run(rootSaga);

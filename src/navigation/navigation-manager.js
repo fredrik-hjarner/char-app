@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { View } from "react-native";
 
 import {
   Home,
@@ -8,6 +9,7 @@ import {
   SwitchCharacter,
   Battle
 } from "routes";
+import { Toastr } from "components";
 import { currentRouteSelector } from "state-management/navigation";
 
 type Props = {
@@ -20,7 +22,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(
   class extends PureComponent<Props> {
-    render() {
+    renderRoute() {
       const { currentRoute } = this.props;
       switch (currentRoute) {
         case "Home":
@@ -41,6 +43,15 @@ export default connect(mapStateToProps)(
         default:
           return <Home />;
       }
+    }
+
+    render() {
+      return (
+        <View>
+          {this.renderRoute()}
+          <Toastr />
+        </View>
+      );
     }
   }
 );

@@ -1,5 +1,5 @@
-import React, { PureComponent, Fragment } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import React from "react";
+import { View } from "react-native";
 import { Provider as StoreProvider } from "react-redux";
 import { Provider as PaperProvider } from "react-native-paper";
 import { PersistGate } from "redux-persist/lib/integration/react";

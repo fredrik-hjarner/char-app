@@ -27,4 +27,12 @@ export default class {
         return data.map(k => k.replace(new RegExp(`^${prefix}`), ""));
       });
   }
+
+  static deleteAllValues(): Promise<any> {
+    return axios.delete("http://localhost:8080/value");
+  }
+
+  static deleteOneValue(key: string): Promise<any> {
+    return axios.delete(`http://localhost:8080/value?key=${key}`);
+  }
 }
