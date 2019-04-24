@@ -102,10 +102,13 @@ export function* fetchAbilitiesSaga() {
   }
 }
 
-export function* saveAbilitiesSaga(abilities: Object) {
+export function* saveAbilitiesSaga({ payload: { abilities } }: Object) {
   const activeCharacter = yield select(activeCharacterSelector);
 
-  yield KeyValueService.setValue(`${activeCharacter}/abilities`, abilities);
+  yield KeyValueService.setValue(
+    `${activeCharacter}/abilities`,
+    JSON.stringify(abilities)
+  );
 
   yield put({ type: SAVE_ABILITIES_SUCCESS });
   yield put(fetchAbilities());

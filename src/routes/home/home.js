@@ -4,9 +4,12 @@ import { connect } from "react-redux";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
-import { KeyValueService } from "api";
 import { LayoutWithFooter, LayoutWithHeader } from "layouts";
-import { fetchAbilities, abilitiesSelector } from "state-management/abilities";
+import {
+  fetchAbilities,
+  saveAbilities,
+  abilitiesSelector
+} from "state-management/abilities";
 import Abilities from "./abilities";
 
 const iconSize = 24;
@@ -22,7 +25,8 @@ type Props = {
     wisdom: number,
     charisma: number
   },
-  fetchAbilities: Function
+  fetchAbilities: Function,
+  saveAbilities: Function
 };
 
 const mapStateToProps = state => ({
@@ -31,7 +35,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchAbilities }
+  { fetchAbilities, saveAbilities }
 )(
   class extends PureComponent<Props> {
     componentDidMount() {
@@ -44,14 +48,10 @@ export default connect(
 
     save = () => {
       if (!this.abilities) {
+        console.log("home: save: !this.abilities. wont save.");
         return;
       }
-      KeyValueService.setValue(
-        "bruno/abilities",
-        JSON.stringify(this.abilities)
-      )
-        .then(() => console.log("saved!"))
-        .catch(exception => console.log("exception:", exception, ""));
+      this.props.saveAbilities(this.abilities);
     };
 
     handleAbilityChange = (abilities: Object) => (this.abilities = abilities);
