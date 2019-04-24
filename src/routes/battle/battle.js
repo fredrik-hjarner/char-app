@@ -77,13 +77,21 @@ export default connect(
 
     handleACChange = (ac: Object) => (this.AC = ac);
 
+    save = () => {
+      this.saveHP();
+      this.saveAC();
+    };
+
+    load = () => {
+      this.loadHP();
+      this.loadAC();
+    };
+
     render() {
       const { weapons } = this.props;
       const actions = [
-        { text: "Load HP", callback: this.loadHP, icon: loadIcon },
-        { text: "Save HP", callback: this.saveHP, icon: saveIcon },
-        { text: "Load AC", callback: this.loadAC, icon: loadIcon },
-        { text: "Save AC", callback: this.saveAC, icon: saveIcon }
+        { text: "Load", callback: this.load, icon: loadIcon },
+        { text: "Save", callback: this.save, icon: saveIcon }
       ];
       return (
         <LayoutWithHeader>
