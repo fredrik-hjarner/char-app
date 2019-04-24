@@ -3,12 +3,13 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 
-import { Text } from "components";
+import { Text, H1, Padding } from "components";
 import { LayoutWithFooter } from "layouts";
 import {
   fetchCharacterIndex,
   characterIndexSelector,
-  setActiveCharacter
+  setActiveCharacter,
+  activeCharacterSelector
 } from "state-management/character";
 import { goBack, pushRoute } from "state-management/navigation";
 
@@ -22,11 +23,13 @@ type Props = {
   pushRoute: Function,
   fetchCharacterIndex: Function,
   setActiveCharacter: Function,
-  characterIndex: [string]
+  characterIndex: [string],
+  activeCharacter: string | null
 };
 
 const mapStateToProps = state => ({
-  characterIndex: characterIndexSelector(state)
+  characterIndex: characterIndexSelector(state),
+  activeCharacter: activeCharacterSelector(state)
 });
 
 export default connect(
@@ -46,14 +49,16 @@ export default connect(
     };
 
     render() {
-      const { characterIndex } = this.props;
-      const actions = [
-        { text: "Cancel", callback: this.cancel, icon: cancelIcon }
-      ];
+      const { characterIndex, activeCharacter } = this.props;
+      const actions = activeCharacter
+        ? [{ text: "Cancel", callback: this.cancel, icon: cancelIcon }]
+        : undefined;
       return (
         <LayoutWithFooter actions={actions}>
           <View style={styles.container}>
-            <Text>Switch character</Text>
+            <H1>Choose character</H1>
+            <Padding />
+            <Padding />
             {characterIndex.map(char => (
               <TouchableOpacity onPress={() => this.switchCharacter(char)}>
                 <Text>{char}</Text>

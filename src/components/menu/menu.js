@@ -59,10 +59,13 @@ export default connect(
     renderRoutes() {
       return (
         <View style={styles.routesContainer}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => this.props.pushRoute("KeyValueTester")}
           >
             <Text style={styles.text}>K-v-pairs</Text>
+          </TouchableOpacity> */}
+          <TouchableOpacity onPress={() => this.props.pushRoute("Info")}>
+            <Text style={styles.text}>Info</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.pushRoute("Home")}>
             <Text style={styles.text}>Abilities</Text>

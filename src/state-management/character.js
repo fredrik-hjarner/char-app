@@ -22,12 +22,12 @@ const FETCH_CHARACTER_INDEX_SUCCESS = "FETCH_CHARACTER_INDEX_SUCCESS";
 const FETCH_CHARACTER_INDEX_ERROR = "FETCH_CHARACTER_INDEX_ERROR";
 
 type State = {
-  activeCharacter: string,
+  activeCharacter: string | null,
   characterIndex: [string]
 };
 
 const INITIAL_STATE: State = {
-  activeCharacter: "bruno",
+  activeCharacter: null,
   characterIndex: []
 };
 

@@ -8,7 +8,8 @@ import {
   CreateNewCharacter,
   CreateFirstCharacter,
   SwitchCharacter,
-  Battle
+  Battle,
+  Info
 } from "routes";
 import { Toastr } from "components";
 import { currentRouteSelector } from "state-management/navigation";
@@ -40,6 +41,9 @@ export default connect(mapStateToProps)(
 
         case "SwitchCharacter":
           return <SwitchCharacter />;
+
+        case "Info":
+          return <Info />;
 
         case "Battle":
           return <Battle />;
