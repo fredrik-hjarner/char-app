@@ -79,6 +79,15 @@ export default class App extends Component<Props, State> {
     this.setState({ [ability]: value }, () => this.props.onChange(this.state));
   };
 
+  calcMod(ability) {
+    const diff = parseInt(ability, 10) - 10;
+    const mod = Math.round((diff - 1) / 2);
+    if (mod > 0) {
+      return `+${mod}`;
+    }
+    return `${mod}`;
+  }
+
   renderTableHeader() {
     return (
       <View style={[styles.abilityContainer, { opacity: 0.5 }]}>
@@ -103,10 +112,12 @@ export default class App extends Component<Props, State> {
           style={styles.textInput}
           keyboardType="numeric"
           onChangeText={text => this.changeAbility(ability, text)}
-          value={`${this.state[ability]}`}
+          value={this.state[ability]}
         />
         <View style={{ width: thirdColWidth, alignItems: "center" }}>
-          <Text style={{ fontSize: 19 }}>+1</Text>
+          <Text style={{ fontSize: 19 }}>
+            {this.calcMod(this.state[ability])}
+          </Text>
         </View>
       </View>
     );
