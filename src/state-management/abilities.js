@@ -22,12 +22,12 @@ type State = {
 
 const INITIAL_STATE: State = {
   abilities: {
-    strength: 1,
-    dexterity: 1,
-    constitution: 1,
-    intelligence: 1,
-    wisdom: 1,
-    charisma: 1
+    strength: "1",
+    dexterity: "1",
+    constitution: "1",
+    intelligence: "1",
+    wisdom: "1",
+    charisma: "1"
   }
 };
 

@@ -111,10 +111,13 @@ export function* fetchWeaponsSaga() {
   }
 }
 
-export function* saveWeaponsSaga(hp: Object) {
+export function* saveWeaponsSaga({ payload: { weapons } }: Object) {
   const activeCharacter = yield select(activeCharacterSelector);
 
-  yield KeyValueService.setValue(`${activeCharacter}/hp`, hp);
+  yield KeyValueService.setValue(
+    `${activeCharacter}/weapons`,
+    JSON.stringify(weapons)
+  );
 
   yield put({ type: SAVE_WEAPONS_SUCCESS });
   yield put(fetchWeapons());

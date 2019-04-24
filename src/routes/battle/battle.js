@@ -16,40 +16,59 @@ import {
   TextInput,
   Padding
 } from "components";
-import { fetchHP, maxHPSelector, currentHPSelector } from "state-management/hp";
+import { fetchHP, saveHP, HPSelector } from "state-management/hp";
 import { fetchAC, totalACSelector } from "state-management/ac";
 import { fetchWeapons, weaponsSelector } from "state-management/weapons";
 import Weapons from "./weapons";
+import HP from "./hp";
 
 const iconSize = 24;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
 const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 
 type Props = {
-  maxHP: number,
-  currentHP: number,
+  HP: {
+    maxHP: number,
+    currentHP: number
+  },
   fetchHP: Function,
+  saveHP: Function,
   fetchAC: Function,
   fetchWeapons: Function
 };
 
 const mapStateToProps = state => ({
-  maxHP: maxHPSelector(state),
-  currentHP: currentHPSelector(state),
+  HP: HPSelector(state),
   totalAC: totalACSelector(state),
   weapons: weaponsSelector(state)
 });
 
 export default connect(
   mapStateToProps,
-  { fetchHP, fetchAC, fetchWeapons }
+  { fetchHP, saveHP, fetchAC, fetchWeapons }
 )(
   class extends PureComponent<Props> {
+    HP: ?string;
+
     componentDidMount() {
       this.props.fetchHP();
       this.props.fetchAC();
       this.props.fetchWeapons();
     }
+
+    loadHP = () => {
+      this.props.fetchHP();
+    };
+
+    saveHP = () => {
+      if (!this.HP) {
+        console.log("home: save: !this.hp. wont save.");
+        return;
+      }
+      this.props.saveHP(this.HP);
+    };
+
+    handleHPChange = (hp: Object) => (this.HP = hp);
 
     renderAC() {
       const { totalAC } = this.props;
@@ -72,44 +91,11 @@ export default connect(
       );
     }
 
-    renderHP() {
-      const { maxHP, currentHP } = this.props;
-      return (
-        <InnerContainer>
-          <H1>Hit points</H1>
-          <Padding />
-          <Grid>
-            <Row vc width={9}>
-              <Text>Max:</Text>
-            </Row>
-            <Row width={9}>
-              <TextInput
-                onChangeText={characterName => this.setState({ characterName })}
-                value={`${maxHP}`}
-              />
-            </Row>
-          </Grid>
-          <Padding />
-          <Grid>
-            <Row vc width={9}>
-              <Text>Current:</Text>
-            </Row>
-            <Row width={9}>
-              <TextInput
-                onChangeText={characterName => this.setState({ characterName })}
-                value={`${currentHP}`}
-              />
-            </Row>
-          </Grid>
-        </InnerContainer>
-      );
-    }
-
     render() {
       const { weapons } = this.props;
       const actions = [
-        { text: "Load", callback: this.load, icon: loadIcon },
-        { text: "Save", callback: this.save, icon: saveIcon }
+        { text: "Load HP", callback: this.loadHP, icon: loadIcon },
+        { text: "Save HP", callback: this.saveHP, icon: saveIcon }
       ];
       return (
         <LayoutWithHeader>
@@ -117,7 +103,9 @@ export default connect(
             <ScrollView>
               <Container>
                 <Grid>
-                  <Row width={8}>{this.renderHP()}</Row>
+                  <Row width={8}>
+                    <HP HP={this.props.HP} onChange={this.handleHPChange} />
+                  </Row>
                   <Row />
                   <Row width={9}>{this.renderAC()}</Row>
                 </Grid>

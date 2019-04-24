@@ -22,8 +22,8 @@ type State = {
 };
 
 const INITIAL_STATE: State = {
-  maxHP: 0,
-  currentHP: 0
+  maxHP: "0",
+  currentHP: "0"
 };
 
 /** *****************************************************************
@@ -60,6 +60,7 @@ export const saveHP = (hp: Object) => ({
     Selectors
 ****************************************************************** */
 
+export const HPSelector = (state: Object): Object => state.hp;
 export const maxHPSelector = (state: Object): Object => state.hp.maxHP;
 export const currentHPSelector = (state: Object): Object => state.hp.currentHP;
 
@@ -94,10 +95,10 @@ export function* fetchHPSaga() {
   }
 }
 
-export function* saveHPSaga(hp: Object) {
+export function* saveHPSaga({ payload: { hp } }: Object) {
   const activeCharacter = yield select(activeCharacterSelector);
 
-  yield KeyValueService.setValue(`${activeCharacter}/hp`, hp);
+  yield KeyValueService.setValue(`${activeCharacter}/hp`, JSON.stringify(hp));
 
   yield put({ type: SAVE_HP_SUCCESS });
   yield put(fetchHP());

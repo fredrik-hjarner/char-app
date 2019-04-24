@@ -100,27 +100,27 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
     // Create default abilities
     yield put(
       saveAbilities({
-        strength: 1,
-        dexterity: 1,
-        constitution: 1,
-        intelligence: 1,
-        wisdom: 1,
-        charisma: 1
+        strength: "1",
+        dexterity: "1",
+        constitution: "1",
+        intelligence: "1",
+        wisdom: "1",
+        charisma: "1"
       })
     );
 
     // Create default hp
     yield put(
       saveHP({
-        maxHP: 0,
-        currentHP: 0
+        maxHP: "0",
+        currentHP: "0"
       })
     );
 
     // Create default ac
     yield put(
       saveAC({
-        ac: 10
+        ac: "10"
       })
     );
 

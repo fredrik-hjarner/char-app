@@ -87,10 +87,10 @@ export function* fetchACSaga() {
   }
 }
 
-export function* saveACSaga(ac: Object) {
+export function* saveACSaga({ payload: { ac } }: Object) {
   const activeCharacter = yield select(activeCharacterSelector);
 
-  yield KeyValueService.setValue(`${activeCharacter}/ac`, ac);
+  yield KeyValueService.setValue(`${activeCharacter}/ac`, JSON.stringify(ac));
 
   yield put({ type: SAVE_AC_SUCCESS });
   yield put(fetchAC());
