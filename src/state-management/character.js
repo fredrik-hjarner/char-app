@@ -118,11 +118,7 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
     );
 
     // Create default ac
-    yield put(
-      saveAC({
-        ac: { total: "10" }
-      })
-    );
+    yield put(saveAC({ total: "10" }));
 
     // Create default weapons
     // yield put(createDefaultWeapons(characterName));
