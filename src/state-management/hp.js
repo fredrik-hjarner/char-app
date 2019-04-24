@@ -22,8 +22,8 @@ type State = {
 };
 
 const INITIAL_STATE: State = {
-  maxHP: "0",
-  currentHP: "0"
+  maxHP: "1",
+  currentHP: "1"
 };
 
 /** *****************************************************************

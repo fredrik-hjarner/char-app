@@ -3,7 +3,7 @@ import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { KeyValueService } from "api";
-import { Text, H1, Container, Padding } from "components";
+import { B, H1, Container, Padding } from "components";
 import { LayoutWithHeader, LayoutWithFooter } from "layouts";
 
 const iconSize = 24;
@@ -40,7 +40,7 @@ export default class extends PureComponent<Props, State> {
 
   renderKeys() {
     const { keys } = this.state;
-    return keys.map(k => <Text>* {k}</Text>);
+    return keys.map(k => <B>{k}:</B>);
   }
 
   render() {

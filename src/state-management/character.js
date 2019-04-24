@@ -112,15 +112,15 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
     // Create default hp
     yield put(
       saveHP({
-        maxHP: "0",
-        currentHP: "0"
+        maxHP: "1",
+        currentHP: "1"
       })
     );
 
     // Create default ac
     yield put(
       saveAC({
-        ac: "10"
+        ac: { total: "10" }
       })
     );
 
