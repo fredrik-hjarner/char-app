@@ -28,7 +28,7 @@ type State = {
   weapons: [Weapon]
 };
 
-const INITIAL_STATE: State = {
+export const INITIAL_STATE: State = {
   weapons: [
     {
       weapon: "Longsword",
@@ -56,7 +56,7 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
     case FETCH_WEAPONS_SUCCESS:
       return {
         ...state,
-        ...action.payload.hp
+        weapons: action.payload.weapons
       };
 
     default:
@@ -72,9 +72,9 @@ export const fetchWeapons = () => ({
   type: FETCH_WEAPONS_START
 });
 
-export const saveWeapons = (hp: Object) => ({
+export const saveWeapons = (weapons: []) => ({
   type: SAVE_WEAPONS_START,
-  payload: { hp }
+  payload: { weapons }
 });
 
 /** *****************************************************************
@@ -91,21 +91,12 @@ export function* fetchWeaponsSaga() {
   const activeCharacter = yield select(activeCharacterSelector);
 
   try {
-    let weapons = yield KeyValueService.getValue(`${activeCharacter}/hp`);
-
-    /**
-     * TODO: This is quite ugly but check if no values was returned
-     * and put in default props.
-     */
-    if (!weapons?.weapons) {
-      weapons = {
-        maxHP: 0,
-        currentHP: 0
-      };
-    }
-
+    const weapons = yield KeyValueService.getValue(
+      `${activeCharacter}/weapons`
+    );
     yield put({ type: FETCH_WEAPONS_SUCCESS, payload: { weapons } });
   } catch (exception) {
+    console.log("fetchWeaponsSaga: exception:", exception, "");
     yield put({ type: FETCH_WEAPONS_ERROR });
     yield put(openToastr({ text: `${exception}`, type: TOASTR_ERROR }));
   }
@@ -119,7 +110,7 @@ export function* saveWeaponsSaga({ payload: { weapons } }: Object) {
     JSON.stringify(weapons)
   );
 
-  yield put({ type: SAVE_WEAPONS_SUCCESS });
+  yield put({ type: SAVE_WEAPONS_SUCCESS, payload: { weapons } });
   yield put(fetchWeapons());
 }
 

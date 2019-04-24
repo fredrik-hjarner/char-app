@@ -11,7 +11,8 @@ import {
 } from "components";
 
 type Props = {
-  HP: { maxHP: string, currentHP: string }
+  HP: { maxHP: string, currentHP: string },
+  onChange: Function
 };
 
 type State = {

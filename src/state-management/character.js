@@ -5,6 +5,7 @@ import { pushRoute } from "./navigation";
 import { saveAbilities } from "./abilities";
 import { saveHP } from "./hp";
 import { saveAC } from "./ac";
+import { saveWeapons, INITIAL_STATE as WEAPONS_INITIAL_STATE } from "./weapons";
 
 /** *****************************************************************
     Constants
@@ -119,6 +120,9 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
 
     // Create default ac
     yield put(saveAC({ total: "10" }));
+
+    // Create default weapons
+    yield put(saveWeapons(WEAPONS_INITIAL_STATE.weapons));
 
     // Create default weapons
     // yield put(createDefaultWeapons(characterName));

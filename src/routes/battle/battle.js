@@ -8,7 +8,11 @@ import { LayoutWithHeader, LayoutWithFooter } from "layouts";
 import { Container, FreeTextNotes, Grid, Row } from "components";
 import { fetchHP, saveHP, HPSelector } from "state-management/hp";
 import { fetchAC, saveAC, ACSelector } from "state-management/ac";
-import { fetchWeapons, weaponsSelector } from "state-management/weapons";
+import {
+  fetchWeapons,
+  saveWeapons,
+  weaponsSelector
+} from "state-management/weapons";
 import Weapons from "./weapons";
 import HP from "./hp";
 import AC from "./ac";
@@ -27,7 +31,8 @@ type Props = {
   saveHP: Function,
   fetchAC: Function,
   saveAC: Function,
-  fetchWeapons: Function
+  fetchWeapons: Function,
+  saveWeapons: Function
 };
 
 const mapStateToProps = state => ({
@@ -38,7 +43,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchHP, saveHP, fetchAC, saveAC, fetchWeapons }
+  { fetchHP, saveHP, fetchAC, saveAC, fetchWeapons, saveWeapons }
 )(
   class extends Component<Props> {
     HP: ?string;
@@ -55,7 +60,7 @@ export default connect(
 
     saveHP = () => {
       if (!this.HP) {
-        console.log("home: save: !this.HP. wont save.");
+        console.log("battle: save: !this.HP. wont save.");
         return;
       }
       this.props.saveHP(this.HP);
@@ -69,7 +74,7 @@ export default connect(
 
     saveAC = () => {
       if (!this.AC) {
-        console.log("home: save: !this.AC. wont save.");
+        console.log("battle: save: !this.AC. wont save.");
         return;
       }
       this.props.saveAC(this.AC);
@@ -77,14 +82,30 @@ export default connect(
 
     handleACChange = (ac: Object) => (this.AC = ac);
 
+    loadWeapons = () => {
+      this.props.fetchWeapons();
+    };
+
+    saveWeapons = () => {
+      if (!this.weapons) {
+        console.log("battle: save: !this.weapons. wont save.");
+        return;
+      }
+      this.props.saveWeapons(this.weapons);
+    };
+
+    handleWeaponsChange = (weapons: any) => (this.weapons = weapons);
+
     save = () => {
       this.saveHP();
       this.saveAC();
+      this.saveWeapons();
     };
 
     load = () => {
       this.loadHP();
       this.loadAC();
+      this.loadWeapons();
     };
 
     render() {
@@ -107,7 +128,10 @@ export default connect(
                     <AC AC={this.props.AC} onChange={this.handleACChange} />
                   </Row>
                 </Grid>
-                <Weapons weapons={weapons} />
+                <Weapons
+                  weapons={weapons}
+                  onChange={this.handleWeaponsChange}
+                />
                 <FreeTextNotes />
               </Container>
             </ScrollView>
