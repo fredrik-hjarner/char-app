@@ -24,7 +24,7 @@ export default connect(
   { setActiveCharacter, createNewCharacter, pushRoute }
 )(
   class extends PureComponent<Props> {
-    setActiveCharacter = () => this.props.pushRoute("SwitchCharacter"); // this.props.setActiveCharacter("quinn");
+    setActiveCharacter = () => this.props.pushRoute("SwitchCharacter");
 
     createNewCharacter = () => this.props.pushRoute("CreateNewCharacter");
 
@@ -72,6 +72,9 @@ export default connect(
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.pushRoute("Battle")}>
             <Text style={styles.text}>Battle</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.pushRoute("Equipment")}>
+            <Text style={styles.text}>EQ</Text>
           </TouchableOpacity>
         </View>
       );
