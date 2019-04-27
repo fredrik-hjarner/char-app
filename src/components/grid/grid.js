@@ -40,7 +40,7 @@ export const Column = ({
 }: ColumnProps) => (
   <View
     style={[
-      styles.row,
+      styles.column,
       { width: `${width * (100 / 18)}%` },
       vc ? { alignItems: "center" } : undefined,
       style
@@ -58,7 +58,7 @@ export const Padding = ({ big }) => (
 
 const styles = StyleSheet.create({
   grid: { flexDirection: "row", flexWrap: "wrap" },
-  row: { flexDirection: "row", flexWrap: "wrap" },
+  column: { flexDirection: "row", flexWrap: "wrap" },
   padding: {
     height: 5
   },

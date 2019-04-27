@@ -85,7 +85,7 @@ export default class App extends Component<Props, State> {
 
   renderTableHeader() {
     return (
-      <>
+      <View>
         <Grid style={{ opacity: 0.5 }}>
           <Column width={6} />
           <Column width={6}>
@@ -96,13 +96,13 @@ export default class App extends Component<Props, State> {
           </Column>
         </Grid>
         <Padding />
-      </>
+      </View>
     );
   }
 
   renderAbility(ability: string) {
     return (
-      <>
+      <View>
         <Grid>
           <Column width={6} style={{ alignItems: "center" }}>
             <H1>{ability.slice(0, 3).toUpperCase()}</H1>
@@ -124,7 +124,7 @@ export default class App extends Component<Props, State> {
           </Column>
         </Grid>
         <Padding />
-      </>
+      </View>
     );
   }
 
