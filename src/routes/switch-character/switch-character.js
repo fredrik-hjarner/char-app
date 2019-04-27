@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 
-import { Text, H1, Padding } from "components";
+import { Text, H1, Padding, TouchableOpacity } from "components";
 import { LayoutWithFooter } from "layouts";
 import {
   fetchCharacterIndex,

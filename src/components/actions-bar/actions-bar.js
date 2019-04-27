@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import { Text } from "components";
+import { Text, TouchableOpacity } from "components";
 
 type Props = {
   actions: [
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 10
   },
   text: {
-    color: "white",
+    color: "white"
     // fontWeight: "bold"
   },
   iconContainer: {
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 });

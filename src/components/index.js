@@ -8,5 +8,6 @@ export { default as InnerContainer } from "./inner-container";
 export { default as FreeTextNotes } from "./free-text-notes";
 export { default as Toastr } from "./toastr";
 export { default as HR } from "./hr";
+export { default as TouchableOpacity } from "./touchable-opacity";
 export * from "./grid";
 export * from "./typography";

@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
-import { Text } from "components";
+import { Text, TouchableOpacity } from "components";
 import {
   activeCharacterSelector,
   setActiveCharacter,
