@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import { View } from "react-native";
 import { lowerCase, capitalize } from "lodash";
 
-import { Text, TextInput, H1, Grid, Column, Padding } from "components";
+import { Text, Grid, Column, Padding, TouchableOpacity } from "components";
 
-type Props = {
-  onChange: Function
-};
+type Props = {};
 
 type State = {};
 
 export default class App extends Component<Props, State> {
   renderHeader() {
     return (
-      <Grid>
+      <Grid style={{ opacity: 0.5 }}>
         <Column width={3}>
           <Text>profici</Text>
         </Column>
@@ -32,7 +29,7 @@ export default class App extends Component<Props, State> {
     return (
       <Grid>
         <Column width={1}>
-          <View
+          <TouchableOpacity
             style={{
               borderWidth: 1,
               borderColor: "black",
@@ -46,7 +43,7 @@ export default class App extends Component<Props, State> {
             }}
           >
             <Text style={{ margin: 0, padding: 0 }}>x</Text>
-          </View>
+          </TouchableOpacity>
         </Column>
         <Column />
         <Column width={1}>
