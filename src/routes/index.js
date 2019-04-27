@@ -5,3 +5,4 @@ export { default as CreateFirstCharacter } from "./create-first-character";
 export { default as SwitchCharacter } from "./switch-character";
 export { default as Battle } from "./battle";
 export { default as Info } from "./info";
+export { default as EQ } from "./eq";

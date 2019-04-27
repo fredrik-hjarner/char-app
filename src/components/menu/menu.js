@@ -73,7 +73,7 @@ export default connect(
           <TouchableOpacity onPress={() => this.props.pushRoute("Battle")}>
             <Text style={styles.text}>Battle</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.pushRoute("Equipment")}>
+          <TouchableOpacity onPress={() => this.props.pushRoute("EQ")}>
             <Text style={styles.text}>EQ</Text>
           </TouchableOpacity>
         </View>

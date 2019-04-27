@@ -61,7 +61,6 @@ export default class extends PureComponent<Props, State> {
   };
 
   render() {
-    console.log("HP: this.state:", this.state, "");
     const { maxHP, currentHP } = this.state.HP;
     return (
       <InnerContainer>

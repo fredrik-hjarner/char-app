@@ -72,9 +72,7 @@ export function* fetchHPSaga() {
   const activeCharacter = yield select(activeCharacterSelector);
 
   try {
-    console.log("fetchHPSaga: try:");
     let hp = yield KeyValueService.getValue(`${activeCharacter}/hp`);
-    console.log("fetchHPSaga: after yield promise:");
 
     /**
      * TODO: This is quite ugly but check if no values was returned

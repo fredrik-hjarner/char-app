@@ -50,7 +50,6 @@ export default class extends PureComponent<Props, State> {
   };
 
   render() {
-    console.log("AC: this.state:", this.state, "");
     const { total } = this.state.AC;
     return (
       <InnerContainer>
