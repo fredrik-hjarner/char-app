@@ -3,13 +3,17 @@ import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
-import { Text, TouchableOpacity } from "components";
+import { Text, TouchableOpacity as TB, Grid, Column } from "components";
 import {
   activeCharacterSelector,
   setActiveCharacter,
   createNewCharacter
 } from "state-management/character";
 import { pushRoute } from "state-management/navigation";
+
+const TouchableOpacity = ({ style, ...props }) => (
+  <TB style={[{ width: "100%", alignItems: "center" }, style]} {...props} />
+);
 
 type Props = {
   pushRoute: Function
@@ -34,23 +38,20 @@ export default connect(
         <View style={styles.characterContainer}>
           <Text style={styles.text}>{activeCharacter}</Text>
           <View style={styles.actions}>
-            <TouchableOpacity onPress={this.createNewCharacter}>
+            <TB onPress={this.createNewCharacter}>
               <MaterialCommunityIcon
                 name="account-plus"
                 color="white"
                 size={30}
               />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{ marginLeft: 30 }}
-              onPress={this.setActiveCharacter}
-            >
+            </TB>
+            <TB style={{ marginLeft: 30 }} onPress={this.setActiveCharacter}>
               <MaterialCommunityIcon
                 name="account-switch"
                 color="white"
                 size={24}
               />
-            </TouchableOpacity>
+            </TB>
           </View>
         </View>
       );
@@ -58,25 +59,39 @@ export default connect(
 
     renderRoutes() {
       return (
-        <View style={styles.routesContainer}>
+        <Grid style={styles.routesContainer}>
           {/* <TouchableOpacity
             onPress={() => this.props.pushRoute("KeyValueTester")}
           >
             <Text style={styles.text}>K-v-pairs</Text>
           </TouchableOpacity> */}
-          <TouchableOpacity onPress={() => this.props.pushRoute("Info")}>
-            <Text style={styles.text}>Info</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.pushRoute("Home")}>
-            <Text style={styles.text}>Stats</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.pushRoute("Battle")}>
-            <Text style={styles.text}>Battle</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.pushRoute("EQ")}>
-            <Text style={styles.text}>EQ</Text>
-          </TouchableOpacity>
-        </View>
+          <Column width={4}>
+            <TouchableOpacity
+              style={{ width: "100%" }}
+              onPress={() => this.props.pushRoute("Info")}
+            >
+              <Text style={styles.text}>Info</Text>
+            </TouchableOpacity>
+          </Column>
+
+          <Column width={4}>
+            <TouchableOpacity onPress={() => this.props.pushRoute("Home")}>
+              <Text style={styles.text}>Stats</Text>
+            </TouchableOpacity>
+          </Column>
+
+          <Column width={4}>
+            <TouchableOpacity onPress={() => this.props.pushRoute("Battle")}>
+              <Text style={styles.text}>Battle</Text>
+            </TouchableOpacity>
+          </Column>
+
+          <Column width={6}>
+            <TouchableOpacity onPress={() => this.props.pushRoute("EQ")}>
+              <Text style={styles.text}>Equipment</Text>
+            </TouchableOpacity>
+          </Column>
+        </Grid>
       );
     }
 
@@ -96,9 +111,6 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   routesContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
     backgroundColor: "darkblue",
     paddingRight: 15,
     paddingLeft: 15,
