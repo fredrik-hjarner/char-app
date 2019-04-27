@@ -18,6 +18,8 @@ import { reducer as hpReducer, sagas as hpSagas } from "./hp";
 import { reducer as acReducer, sagas as acSagas } from "./ac";
 import { reducer as weaponsReducer, sagas as weaponsSagas } from "./weapons";
 import { reducer as toastrReducer, sagas as toastrSagas } from "./toastr";
+import { reducer as eqReducer, sagas as eqSagas } from "./eq";
+import { reducer as infoReducer, sagas as infoSagas } from "./info";
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
 
@@ -60,7 +62,9 @@ const reducers = combineReducers({
   hp: hpReducer,
   ac: acReducer,
   weapons: weaponsReducer,
-  toastr: toastrReducer
+  toastr: toastrReducer,
+  eq: eqReducer,
+  info: infoReducer
 });
 
 export const store = createStore(
@@ -77,7 +81,9 @@ function* rootSaga() {
     hpSagas(),
     acSagas(),
     weaponsSagas(),
-    toastrSagas()
+    toastrSagas(),
+    eqSagas(),
+    infoSagas()
   ]);
 }
 
