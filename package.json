@@ -9,7 +9,8 @@
     "clean": "rimraf '{build,.jest,ios/build,android/build}'",
     "clean:all": "yarn clean && rimraf {node_modules,./gems,ios/Pods,android/.gradle}",
     "purge": "yarn clean:all && yarn",
-    "rn": "react-native run-android"
+    "rn": "react-native run-android",
+    "build": "cd android; ./gradlew clean; ./gradlew assembleRelease > myLogs.txt 2> logErrors.txt; cd ..; explorer android/app/build/outputs/apk/release"
   },
   "dependencies": {
     "axios": "^0.18.0",
