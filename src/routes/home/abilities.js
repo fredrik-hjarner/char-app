@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 
-import { Text, TextInput } from "components";
-import styles, {
-  firstColWidth,
-  secondColWidth,
-  thirdColWidth
-} from "./styles/abilities";
+import { Text, TextInput, H1, Grid, Column, Padding } from "components";
 
 type Props = {
   strength: number,
@@ -90,42 +85,52 @@ export default class App extends Component<Props, State> {
 
   renderTableHeader() {
     return (
-      <View style={[styles.abilityContainer, { opacity: 0.5 }]}>
-        <View style={{ width: firstColWidth }} />
-        <View style={{ width: secondColWidth, alignItems: "center" }}>
-          <Text>score</Text>
-        </View>
-        <View style={{ width: thirdColWidth, alignItems: "center" }}>
-          <Text>mod</Text>
-        </View>
-      </View>
+      <>
+        <Grid style={{ opacity: 0.5 }}>
+          <Column width={6} />
+          <Column width={6}>
+            <Text>score</Text>
+          </Column>
+          <Column width={6} style={{ justifyContent: "center" }}>
+            <Text>mod</Text>
+          </Column>
+        </Grid>
+        <Padding />
+      </>
     );
   }
 
   renderAbility(ability: string) {
     return (
-      <View style={styles.abilityContainer}>
-        <View style={{ width: firstColWidth }}>
-          <Text style={{ fontSize: 19 }}>{ability}</Text>
-        </View>
-        <TextInput
-          style={styles.textInput}
-          keyboardType="numeric"
-          onChangeText={text => this.changeAbility(ability, text)}
-          value={this.state[ability]}
-        />
-        <View style={{ width: thirdColWidth, alignItems: "center" }}>
-          <Text style={{ fontSize: 19 }}>
-            {this.calcMod(this.state[ability])}
-          </Text>
-        </View>
-      </View>
+      <>
+        <Grid>
+          <Column width={6} style={{ alignItems: "center" }}>
+            <H1>{ability.slice(0, 3).toUpperCase()}</H1>
+          </Column>
+          <Column width={6} style={{ alignItems: "center" }}>
+            <TextInput
+              keyboardType="numeric"
+              onChangeText={text => this.changeAbility(ability, text)}
+              value={this.state[ability]}
+            />
+          </Column>
+          <Column
+            width={6}
+            style={{ alignItems: "center", justifyContent: "center" }}
+          >
+            <H1 style={{ fontWeight: "normal" }}>
+              {this.calcMod(this.state[ability])}
+            </H1>
+          </Column>
+        </Grid>
+        <Padding />
+      </>
     );
   }
 
-  render() {
+  renderAbilities() {
     return (
-      <View style={styles.container}>
+      <>
         {this.renderTableHeader()}
         {this.renderAbility("strength")}
         {this.renderAbility("dexterity")}
@@ -133,6 +138,16 @@ export default class App extends Component<Props, State> {
         {this.renderAbility("intelligence")}
         {this.renderAbility("wisdom")}
         {this.renderAbility("charisma")}
+      </>
+    );
+  }
+
+  render() {
+    return (
+      <View>
+        <Grid>
+          <Column width={9}>{this.renderAbilities()}</Column>
+        </Grid>
       </View>
     );
   }

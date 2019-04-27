@@ -7,7 +7,7 @@ export const Grid = ({ children, style, ...props }) => (
   </View>
 );
 
-type RowProps = {
+type ColumnProps = {
   width:
     | 1
     | 2
@@ -31,7 +31,13 @@ type RowProps = {
   vc?: boolean
 };
 
-export const Row = ({ children, style, vc, width = 1, ...props }: RowProps) => (
+export const Column = ({
+  children,
+  style,
+  vc,
+  width = 1,
+  ...props
+}: ColumnProps) => (
   <View
     style={[
       styles.row,

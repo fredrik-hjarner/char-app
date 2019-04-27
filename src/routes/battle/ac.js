@@ -5,7 +5,7 @@ import {
   B,
   InnerContainer,
   Grid,
-  Row,
+  Column,
   TextInput,
   Padding
 } from "components";
@@ -57,12 +57,12 @@ export default class extends PureComponent<Props, State> {
         <B>Armor class</B>
         <Padding />
         <Grid>
-          <Row vc width={9}>
+          <Column vc width={9}>
             <Text>Total:</Text>
-          </Row>
-          <Row width={9}>
+          </Column>
+          <Column width={9}>
             <TextInput onChangeText={this.handleTotalACChange} value={total} />
-          </Row>
+          </Column>
         </Grid>
       </InnerContainer>
     );

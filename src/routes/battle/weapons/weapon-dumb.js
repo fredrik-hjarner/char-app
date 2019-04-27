@@ -1,7 +1,14 @@
 import React from "react";
 import { View } from "react-native";
 
-import { P, InnerContainer, Grid, Row, TextInput, Padding } from "components";
+import {
+  P,
+  InnerContainer,
+  Grid,
+  Column,
+  TextInput,
+  Padding
+} from "components";
 
 type Props = {
   weapon: {
@@ -24,7 +31,7 @@ export default React.memo((props: Props) => {
   return (
     <InnerContainer>
       <Grid>
-        <Row width={11}>
+        <Column width={11}>
           <View>
             <P>Weapon name:</P>
             <TextInput
@@ -33,23 +40,23 @@ export default React.memo((props: Props) => {
               value={weapon}
             />
           </View>
-        </Row>
-        <Row />
-        <Row width={6}>
+        </Column>
+        <Column />
+        <Column width={6}>
           <P>Type:</P>
           <TextInput onChangeText={onChange("type")} value={type} />
-        </Row>
+        </Column>
       </Grid>
       <Padding />
       <Grid>
-        <Row width={4}>
+        <Column width={4}>
           <View>
             <P>Range:</P>
             <TextInput onChangeText={onChange("range")} value={range} />
           </View>
-        </Row>
-        <Row />
-        <Row width={6}>
+        </Column>
+        <Column />
+        <Column width={6}>
           <View>
             <P>Attack bonus:</P>
             <TextInput
@@ -57,14 +64,14 @@ export default React.memo((props: Props) => {
               value={attackBonus}
             />
           </View>
-        </Row>
-        <Row />
-        <Row width={6}>
+        </Column>
+        <Column />
+        <Column width={6}>
           <View>
             <P>Damage:</P>
             <TextInput onChangeText={onChange("damage")} value={damage} />
           </View>
-        </Row>
+        </Column>
       </Grid>
     </InnerContainer>
   );

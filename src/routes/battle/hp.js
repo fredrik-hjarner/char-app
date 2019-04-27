@@ -5,7 +5,7 @@ import {
   B,
   InnerContainer,
   Grid,
-  Row,
+  Column,
   TextInput,
   Padding
 } from "components";
@@ -68,24 +68,24 @@ export default class extends PureComponent<Props, State> {
         <B>Hit points</B>
         <Padding />
         <Grid>
-          <Row vc width={9}>
+          <Column vc width={9}>
             <Text>Max:</Text>
-          </Row>
-          <Row width={9}>
+          </Column>
+          <Column width={9}>
             <TextInput onChangeText={this.handleMaxHPChange} value={maxHP} />
-          </Row>
+          </Column>
         </Grid>
         <Padding />
         <Grid>
-          <Row vc width={9}>
+          <Column vc width={9}>
             <Text>Current:</Text>
-          </Row>
-          <Row width={9}>
+          </Column>
+          <Column width={9}>
             <TextInput
               onChangeText={this.handleCurrentHPChange}
               value={currentHP}
             />
-          </Row>
+          </Column>
         </Grid>
       </InnerContainer>
     );

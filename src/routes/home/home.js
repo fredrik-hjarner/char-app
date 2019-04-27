@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { LayoutWithFooter, LayoutWithHeader } from "layouts";
+import { Container } from "components";
 import {
   fetchAbilities,
   saveAbilities,
@@ -65,20 +65,12 @@ export default connect(
       return (
         <LayoutWithHeader>
           <LayoutWithFooter actions={actions}>
-            <View style={styles.container}>
+            <Container>
               <Abilities {...abilities} onChange={this.handleAbilityChange} />
-            </View>
+            </Container>
           </LayoutWithFooter>
         </LayoutWithHeader>
       );
     }
   }
 );
-
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});

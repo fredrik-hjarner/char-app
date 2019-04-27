@@ -10,7 +10,7 @@ import {
   P,
   Container,
   Grid,
-  Row,
+  Column,
   TextInput,
   Padding,
   InnerContainer,
@@ -96,57 +96,57 @@ export default defaultProps(mockProps)(
       return (
         <InnerContainer>
           <Grid>
-            <Row width={11}>
+            <Column width={11}>
               <P>Character name:</P>
               <TextInput
                 style={{ width: 1000 }}
                 onChangeText={this.handleChange("characterName")}
                 value={characterName}
               />
-            </Row>
-            <Row />
-            <Row width={6}>
+            </Column>
+            <Column />
+            <Column width={6}>
               <P>Player name:</P>
               <TextInput
                 onChangeText={this.handleChange("playerName")}
                 value={playerName}
               />
-            </Row>
+            </Column>
           </Grid>
           <Padding />
           <Grid>
-            <Row width={11}>
+            <Column width={11}>
               <P>Classes {"&"} levels:</P>
               <TextInput
                 style={{ width: 1000 }}
                 onChangeText={this.handleChange("classesAndLevels")}
                 value={classesAndLevels}
               />
-            </Row>
-            <Row />
-            <Row width={6}>
+            </Column>
+            <Column />
+            <Column width={6}>
               <P>Race:</P>
               <TextInput
                 onChangeText={this.handleChange("race")}
                 value={race}
               />
-            </Row>
+            </Column>
           </Grid>
           <Padding />
           <Grid>
-            <Row width={11}>
+            <Column width={11}>
               <P>Alignment:</P>
               <TextInput
                 style={{ width: 1000 }}
                 onChangeText={this.handleChange("alignment")}
                 value={alignment}
               />
-            </Row>
-            <Row />
-            <Row width={6}>
+            </Column>
+            <Column />
+            <Column width={6}>
               <P>XP:</P>
               <TextInput onChangeText={this.handleChange("XP")} value={XP} />
-            </Row>
+            </Column>
           </Grid>
         </InnerContainer>
       );

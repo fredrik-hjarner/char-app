@@ -5,7 +5,7 @@ import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { LayoutWithHeader, LayoutWithFooter } from "layouts";
-import { Container, FreeTextNotes, Grid, Row } from "components";
+import { Container, FreeTextNotes, Grid, Column } from "components";
 import { fetchHP, saveHP, HPSelector } from "state-management/hp";
 import { fetchAC, saveAC, ACSelector } from "state-management/ac";
 import {
@@ -120,13 +120,13 @@ export default connect(
             <ScrollView>
               <Container>
                 <Grid>
-                  <Row width={8}>
+                  <Column width={8}>
                     <HP HP={this.props.HP} onChange={this.handleHPChange} />
-                  </Row>
-                  <Row />
-                  <Row width={9}>
+                  </Column>
+                  <Column />
+                  <Column width={9}>
                     <AC AC={this.props.AC} onChange={this.handleACChange} />
-                  </Row>
+                  </Column>
                 </Grid>
                 <Weapons
                   weapons={weapons}
