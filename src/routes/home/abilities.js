@@ -128,27 +128,23 @@ export default class App extends Component<Props, State> {
     );
   }
 
-  renderAbilities() {
-    return (
-      <>
-        {this.renderTableHeader()}
-        {this.renderAbility("strength")}
-        {this.renderAbility("dexterity")}
-        {this.renderAbility("constitution")}
-        {this.renderAbility("intelligence")}
-        {this.renderAbility("wisdom")}
-        {this.renderAbility("charisma")}
-      </>
-    );
-  }
-
   render() {
     return (
-      <View>
-        <Grid>
-          <Column width={9}>{this.renderAbilities()}</Column>
-        </Grid>
-      </View>
+      <Grid>
+        <Column width={8}>
+          {this.renderTableHeader()}
+          {this.renderAbility("strength")}
+          {this.renderAbility("dexterity")}
+          {this.renderAbility("constitution")}
+        </Column>
+        <Column />
+        <Column width={9}>
+          {this.renderTableHeader()}
+          {this.renderAbility("intelligence")}
+          {this.renderAbility("wisdom")}
+          {this.renderAbility("charisma")}
+        </Column>
+      </Grid>
     );
   }
 }

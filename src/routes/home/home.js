@@ -5,13 +5,14 @@ import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
 import { LayoutWithFooter, LayoutWithHeader } from "layouts";
-import { Container } from "components";
+import { Container, Padding } from "components";
 import {
   fetchAbilities,
   saveAbilities,
   abilitiesSelector
 } from "state-management/abilities";
 import Abilities from "./abilities";
+import Skills from "./skills";
 
 const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
@@ -69,6 +70,8 @@ export default connect(
             <ScrollView>
               <Container>
                 <Abilities {...abilities} onChange={this.handleAbilityChange} />
+                <Padding big />
+                <Skills />
               </Container>
             </ScrollView>
           </LayoutWithFooter>

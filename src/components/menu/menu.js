@@ -68,7 +68,7 @@ export default connect(
             <Text style={styles.text}>Info</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.pushRoute("Home")}>
-            <Text style={styles.text}>Abilities</Text>
+            <Text style={styles.text}>Stats</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.pushRoute("Battle")}>
             <Text style={styles.text}>Battle</Text>

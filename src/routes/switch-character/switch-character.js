@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
+import { List } from "react-native-paper";
 import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 
-import { Text, H1, Padding, TouchableOpacity } from "components";
+import { H1, Padding, TouchableOpacity, Container } from "components";
 import { LayoutWithFooter } from "layouts";
 import {
   fetchCharacterIndex,
@@ -55,26 +55,30 @@ export default connect(
         : undefined;
       return (
         <LayoutWithFooter actions={actions}>
-          <View style={styles.container}>
+          <Container>
             <H1>Choose character</H1>
-            <Padding />
-            <Padding />
+            <Padding big />
             {characterIndex.map(char => (
               <TouchableOpacity onPress={() => this.switchCharacter(char)}>
-                <Text>{char}</Text>
+                <List.Item
+                  title={char}
+                  description="Item description"
+                  left={({ style, ...props }) => (
+                    <List.Icon
+                      style={[
+                        style,
+                        { backgroundColor: "lightgrey", borderRadius: 50 }
+                      ]}
+                      {...props}
+                      icon="person"
+                    />
+                  )}
+                />
               </TouchableOpacity>
             ))}
-          </View>
+          </Container>
         </LayoutWithFooter>
       );
     }
   }
 );
-
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
