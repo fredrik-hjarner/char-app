@@ -32,17 +32,17 @@ export default class App extends Component<Props, State> {
           <TouchableOpacity
             style={{
               borderWidth: 1,
-              borderColor: "black",
-              height: 22,
-              width: 18,
-              marginBottom: 2,
-              borderRadius: 2,
+              borderColor: "hsl(0, 0%, 50%)",
+              height: 23,
+              width: 20,
+              marginBottom: 3,
+              borderRadius: 3,
               padding: 0,
               alignItems: "center",
               justifyContent: "center"
             }}
           >
-            <Text style={{ margin: 0, padding: 0 }}>x</Text>
+            <Text style={{ margin: 0, padding: 0 }}>X</Text>
           </TouchableOpacity>
         </Column>
         <Column />
