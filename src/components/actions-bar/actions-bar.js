@@ -38,10 +38,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "100%",
     backgroundColor: "darkblue",
-    paddingRight: 15,
-    paddingLeft: 15,
-    paddingTop: 10,
-    paddingBottom: 10
+    paddingTop: 5,
+    paddingBottom: 5
   },
   text: {
     color: "white"

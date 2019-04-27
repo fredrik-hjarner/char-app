@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-import { H1, Padding } from "components";
+import { B, Padding } from "components";
 import Weapon from "./weapon";
 
 type Props = { weapons: [Object], onChange: Function };
@@ -16,7 +16,7 @@ export default class extends PureComponent<Props> {
     const { weapons } = this.props;
     return (
       <>
-        <H1>Weapons</H1>
+        <B>Weapons</B>
         <Padding />
         <Weapon
           index={0}

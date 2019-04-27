@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 
 import {
   Text,
-  H1,
+  B,
   InnerContainer,
   Grid,
   Row,
@@ -54,7 +54,7 @@ export default class extends PureComponent<Props, State> {
     const { total } = this.state.AC;
     return (
       <InnerContainer>
-        <H1>Armor class</H1>
+        <B>Armor class</B>
         <Padding />
         <Grid>
           <Row vc width={9}>

@@ -6,7 +6,7 @@ import { KeyValueService } from "api";
 import { B, H1, Container, Padding } from "components";
 import { LayoutWithHeader, LayoutWithFooter } from "layouts";
 
-const iconSize = 24;
+const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
 const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 

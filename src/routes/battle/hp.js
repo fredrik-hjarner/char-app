@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 
 import {
   Text,
-  H1,
+  B,
   InnerContainer,
   Grid,
   Row,
@@ -65,7 +65,7 @@ export default class extends PureComponent<Props, State> {
     const { maxHP, currentHP } = this.state.HP;
     return (
       <InnerContainer>
-        <H1>Hit points</H1>
+        <B>Hit points</B>
         <Padding />
         <Grid>
           <Row vc width={9}>

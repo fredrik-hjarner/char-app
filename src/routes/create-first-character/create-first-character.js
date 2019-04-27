@@ -8,7 +8,7 @@ import { LayoutWithFooter } from "layouts";
 import { createNewCharacter } from "state-management/character";
 import { goBack } from "state-management/navigation";
 
-const iconSize = 24;
+const iconSize = 20;
 const createIcon = (
   <FontAwesome5Icon name="account-plus" color="white" size={iconSize} />
 );

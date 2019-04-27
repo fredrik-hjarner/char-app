@@ -17,7 +17,7 @@ import Weapons from "./weapons";
 import HP from "./hp";
 import AC from "./ac";
 
-const iconSize = 24;
+const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
 const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 

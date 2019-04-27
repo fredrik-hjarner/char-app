@@ -9,7 +9,7 @@ import { LayoutWithFooter } from "layouts";
 import { createNewCharacter } from "state-management/character";
 import { goBack } from "state-management/navigation";
 
-const iconSize = 24;
+const iconSize = 20;
 const cancelIcon = (
   <SimpleLineIconsIcon name="action-undo" color="white" size={iconSize} />
 );
