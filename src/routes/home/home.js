@@ -71,7 +71,7 @@ export default connect(
               <Container>
                 <Abilities {...abilities} onChange={this.handleAbilityChange} />
                 <Padding big />
-                <Skills />
+                <Skills abilities={abilities} />
               </Container>
             </ScrollView>
           </LayoutWithFooter>

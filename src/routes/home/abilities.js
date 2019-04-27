@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-native";
 
 import { Text, TextInput, H1, Grid, Column, Padding } from "components";
+import { calcMod } from "utils";
 
 type Props = {
   strength: number,
@@ -74,15 +75,6 @@ export default class App extends Component<Props, State> {
     this.setState({ [ability]: value }, () => this.props.onChange(this.state));
   };
 
-  calcMod(ability) {
-    const diff = parseInt(ability, 10) - 10;
-    const mod = Math.round((diff - 1) / 2);
-    if (mod > 0) {
-      return `+${mod}`;
-    }
-    return `${mod}`;
-  }
-
   renderTableHeader() {
     return (
       <View>
@@ -119,7 +111,7 @@ export default class App extends Component<Props, State> {
             style={{ alignItems: "center", justifyContent: "center" }}
           >
             <H1 style={{ fontWeight: "normal" }}>
-              {this.calcMod(this.state[ability])}
+              {calcMod(this.state[ability])}
             </H1>
           </Column>
         </Grid>
