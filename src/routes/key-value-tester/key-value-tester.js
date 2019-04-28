@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, Text } from "react-native";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { connect } from "react-redux";
@@ -52,7 +52,7 @@ export default class extends PureComponent<Props, State> {
           This is definitely a bug. Value SHOULD be a string, not an object
           by this point... i.e. a string should be returned by the server.
         */}
-        <P>{JSON.stringify(value, null, 2)}</P>
+        <Text style={{ fontSize: 12 }}>{JSON.stringify(value, null, 2)}</Text>
       </>
     ));
   }
