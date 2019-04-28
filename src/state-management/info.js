@@ -32,7 +32,7 @@ type State = {
   }
 };
 
-const INITIAL_STATE: State = {
+export const INITIAL_STATE: State = {
   info: {
     characterName: "placeholder",
     playerName: "placeholder",

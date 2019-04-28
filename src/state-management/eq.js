@@ -25,7 +25,7 @@ type State = {
   }
 };
 
-const INITIAL_STATE: State = {
+export const INITIAL_STATE: State = {
   eq: {
     gold: "0",
     silver: "0",
@@ -68,7 +68,7 @@ export const saveEQ = (eq: Object) => ({
     Selectors
 ****************************************************************** */
 
-export const EQSelector = (state: Object): Object => state.eq;
+export const EQSelector = (state: Object): Object => state.eq.eq;
 
 /** *****************************************************************
     Sagas

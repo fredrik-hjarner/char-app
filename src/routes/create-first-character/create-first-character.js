@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { Text, TextInput, H1, Padding, Container } from "components";
 import { LayoutWithFooter } from "layouts";
@@ -10,7 +10,7 @@ import { goBack } from "state-management/navigation";
 
 const iconSize = 20;
 const createIcon = (
-  <FontAwesome5Icon name="account-plus" color="white" size={iconSize} />
+  <MaterialCommunityIcon name="account-plus" color="white" size={iconSize} />
 );
 
 type Props = {

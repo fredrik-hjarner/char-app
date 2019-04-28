@@ -6,6 +6,9 @@ import { saveAbilities } from "./abilities";
 import { saveHP } from "./hp";
 import { saveAC } from "./ac";
 import { saveWeapons, INITIAL_STATE as WEAPONS_INITIAL_STATE } from "./weapons";
+import { saveInfo, INITIAL_STATE as INFO_INITIAL_STATE } from "./info";
+import { saveEQ, INITIAL_STATE as EQ_INITIAL_STATE } from "./eq";
+import { openToastr, TOASTR_ERROR } from "./toastr";
 
 /** *****************************************************************
     Constants
@@ -124,12 +127,18 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
     // Create default weapons
     yield put(saveWeapons(WEAPONS_INITIAL_STATE.weapons));
 
-    // Create default weapons
-    // yield put(createDefaultWeapons(characterName));
+    // Create default info
+    yield put(saveInfo(INFO_INITIAL_STATE.info));
+
+    // Create default EQ
+    yield put(saveEQ(EQ_INITIAL_STATE.eq));
 
     yield put(pushRoute("Home"));
   } catch (exception) {
     console.log("exception:", exception, "");
+    yield put(
+      openToastr({ text: "Failed to create character.", type: TOASTR_ERROR })
+    );
   }
 }
 

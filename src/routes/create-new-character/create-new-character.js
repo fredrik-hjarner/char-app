@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
-import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 
 import { Text, TextInput } from "components";
@@ -14,7 +14,7 @@ const cancelIcon = (
   <SimpleLineIconsIcon name="action-undo" color="white" size={iconSize} />
 );
 const createIcon = (
-  <FontAwesome5Icon name="account-plus" color="white" size={iconSize} />
+  <MaterialCommunityIcon name="account-plus" color="white" size={iconSize} />
 );
 
 type Props = {
