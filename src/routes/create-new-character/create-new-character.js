@@ -1,13 +1,18 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
+import { reduxForm, Field, formValueSelector } from "redux-form";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import SimpleLineIconsIcon from "react-native-vector-icons/SimpleLineIcons";
 
-import { Text, TextInput } from "components";
+import { Text } from "components";
+import { TextInput } from "components/form";
 import { LayoutWithFooter } from "layouts";
 import { createNewCharacter } from "state-management/character";
 import { goBack } from "state-management/navigation";
+
+const formName = "create-new-character";
+const selector = formValueSelector(formName);
 
 const iconSize = 20;
 const cancelIcon = (
@@ -18,44 +23,43 @@ const createIcon = (
 );
 
 type Props = {
+  characterName: string,
   createNewCharacter: Function,
   goBack: Function
 };
 
-type State = { characterName: string };
+const mapStateToProps = state => ({
+  characterName: selector(state, "characterName")
+});
 
-export default connect(
-  null,
+@connect(
+  mapStateToProps,
   { createNewCharacter, goBack }
-)(
-  class extends PureComponent<Props, State> {
-    state = { characterName: "" };
+)
+@reduxForm({
+  form: formName
+})
+export default class extends Component<Props> {
+  cancel = () => this.props.goBack();
 
-    cancel = () => this.props.goBack();
+  create = () => this.props.createNewCharacter(this.props.characterName);
 
-    create = () => this.props.createNewCharacter(this.state.characterName);
-
-    render() {
-      const { characterName } = this.state;
-      const actions = [
-        { text: "Cancel", callback: this.cancel, icon: cancelIcon },
-        { text: "Create", callback: this.create, icon: createIcon }
-      ];
-      return (
-        <LayoutWithFooter actions={actions}>
-          <View style={styles.container}>
-            <Text>Create new character</Text>
-            <Text>Choose a name:</Text>
-            <TextInput
-              onChangeText={characterName => this.setState({ characterName })}
-              value={characterName}
-            />
-          </View>
-        </LayoutWithFooter>
-      );
-    }
+  render() {
+    const actions = [
+      { text: "Cancel", callback: this.cancel, icon: cancelIcon },
+      { text: "Create", callback: this.create, icon: createIcon }
+    ];
+    return (
+      <LayoutWithFooter actions={actions}>
+        <View style={styles.container}>
+          <Text>Create new character</Text>
+          <Text>Choose a name:</Text>
+          <Field name="characterName" component={TextInput} />
+        </View>
+      </LayoutWithFooter>
+    );
   }
-);
+}
 
 const styles = StyleSheet.create({
   container: {

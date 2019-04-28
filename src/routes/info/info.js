@@ -28,7 +28,7 @@ type Props = {
     classesAndLevels: string,
     race: string,
     alignment: string,
-    XP: string,
+    xp: string,
     ideals: string,
     bonds: string,
     flaws: string,
@@ -87,7 +87,7 @@ export default connect(
         classesAndLevels,
         race,
         alignment,
-        XP
+        xp
       } = this.state.info;
 
       return (
@@ -142,7 +142,7 @@ export default connect(
             <Column />
             <Column width={6}>
               <P>XP:</P>
-              <TextInput onChangeText={this.handleChange("XP")} value={XP} />
+              <TextInput onChangeText={this.handleChange("XP")} value={xp} />
             </Column>
           </Grid>
         </InnerContainer>

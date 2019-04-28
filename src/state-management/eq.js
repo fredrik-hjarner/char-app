@@ -43,7 +43,7 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
     case FETCH_EQ_SUCCESS:
       return {
         ...state,
-        ...action.payload.eq
+        eq: action.payload.eq
       };
 
     default:

@@ -4,6 +4,7 @@ import { persistStore, persistReducer, createTransform } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
+import { reducer as formReducer } from "redux-form";
 
 import {
   reducer as characterReducer,
@@ -60,6 +61,7 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
+  form: formReducer,
   character: characterReducer,
   navigation: navigationReducer,
   abilities: abilitiesReducer,

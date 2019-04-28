@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, View } from "react-native";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
@@ -45,6 +45,10 @@ export default connect(
   mapStateToProps,
   { fetchEQ } // TODO: use effect to fetch
 )((props: Props) => {
+  useEffect(() => {
+    props.fetchEQ();
+  }, []);
+
   const {
     eq: { gold, silver, copper, eq }
   } = props;

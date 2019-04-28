@@ -57,7 +57,7 @@ export const reducer = (state: State = INITIAL_STATE, action) => {
     case FETCH_INFO_SUCCESS:
       return {
         ...state,
-        ...action.payload.eq
+        info: action.payload.info
       };
 
     default:
