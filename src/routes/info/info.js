@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { ScrollView } from "react-native";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { defaultProps } from "recompose";
 
 import { LayoutWithHeader, LayoutWithFooter } from "layouts";
 import {
@@ -16,6 +15,7 @@ import {
   InnerContainer,
   TextArea
 } from "components";
+import { infoSelector, fetchInfo } from "state-management/info";
 
 const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
@@ -33,25 +33,18 @@ type Props = {
     bonds: string,
     flaws: string,
     background: string
-  }
+  },
+  fetchInfo: Function
 };
 
-const mockProps = {
-  info: {
-    characterName: "Bruno",
-    playerName: "Fredrik",
-    classesAndLevels: "Fighter lvl 4",
-    race: "Human",
-    alignment: "Chaotic Neutral",
-    XP: "3500",
-    ideals: "some ideal",
-    bonds: "some bond",
-    flaws: "some flaw",
-    background: "best background ever"
-  }
-};
+const mapStateToProps = state => ({
+  info: infoSelector(state)
+});
 
-export default defaultProps(mockProps)(
+export default connect(
+  mapStateToProps,
+  { fetchInfo }
+)(
   class extends PureComponent<Props> {
     constructor(props: Props) {
       super(props);
@@ -59,6 +52,10 @@ export default defaultProps(mockProps)(
       this.state = {
         info: { ...all }
       };
+    }
+
+    componentDidMount() {
+      this.props.fetchInfo();
     }
 
     componentDidUpdate(prevProps, prevState) {

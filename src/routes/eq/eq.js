@@ -14,7 +14,7 @@ import {
   TextInput,
   TextArea
 } from "components";
-import { EQSelector } from "state-management/eq";
+import { EQSelector, fetchEQ } from "state-management/eq";
 
 const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
@@ -26,7 +26,8 @@ type Props = {
     silver: string,
     copper: string,
     eq: string
-  }
+  },
+  fetchEQ: Function
 };
 
 const Coin = ({ type, amount }) => (
@@ -40,7 +41,10 @@ const mapStateToProps = state => ({
   eq: EQSelector(state)
 });
 
-export default connect(mapStateToProps)((props: Props) => {
+export default connect(
+  mapStateToProps,
+  { fetchEQ } // TODO: use effect to fetch
+)((props: Props) => {
   const {
     eq: { gold, silver, copper, eq }
   } = props;

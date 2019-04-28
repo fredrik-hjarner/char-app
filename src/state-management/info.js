@@ -82,7 +82,7 @@ export const saveInfo = (info: Object) => ({
     Selectors
 ****************************************************************** */
 
-export const infoSelector = (state: Object): Object => state.info;
+export const infoSelector = (state: Object): Object => state.info.info;
 
 /** *****************************************************************
     Sagas
