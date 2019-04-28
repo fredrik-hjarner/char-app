@@ -13,8 +13,7 @@ type State = {
 };
 
 const INITIAL_STATE: State = {
-  // currentRoute: "SwitchCharacter",
-  currentRoute: "EQ",
+  currentRoute: "SwitchCharacter",
   routeHistory: []
 };
 

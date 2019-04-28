@@ -1,26 +1,34 @@
 import React, { PureComponent } from "react";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { connect } from "react-redux";
 
 import { KeyValueService } from "api";
 import { B, H1, Container, Padding } from "components";
 import { LayoutWithHeader, LayoutWithFooter } from "layouts";
+import { keysSelector, fetchAllPairs } from "state-management/key-value-pairs";
 
 const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
 const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 
-type Props = {};
-
-type State = {
+type Props = {
   keys: [string]
 };
 
-export default class extends PureComponent<Props, State> {
-  state = { keys: [] };
+type State = {};
 
+const mapStateToProps = state => ({
+  keys: keysSelector(state)
+});
+
+@connect(
+  mapStateToProps,
+  { fetchAllPairs }
+)
+export default class extends PureComponent<Props, State> {
   componentDidMount() {
-    this.getAllKeys();
+    this.props.fetchAllPairs();
   }
 
   deleteOneValue = () =>
@@ -33,13 +41,8 @@ export default class extends PureComponent<Props, State> {
       .then(this.getAllKeys)
       .catch(exception => console.log("exception:", exception, ""));
 
-  getAllKeys = () =>
-    KeyValueService.getAllKeys()
-      .then(keys => this.setState({ keys }))
-      .catch(exception => console.log("exception:", exception, ""));
-
   renderKeys() {
-    const { keys } = this.state;
+    const { keys } = this.props;
     return keys.map(k => <B>{k}:</B>);
   }
 

@@ -20,6 +20,10 @@ import { reducer as weaponsReducer, sagas as weaponsSagas } from "./weapons";
 import { reducer as toastrReducer, sagas as toastrSagas } from "./toastr";
 import { reducer as eqReducer, sagas as eqSagas } from "./eq";
 import { reducer as infoReducer, sagas as infoSagas } from "./info";
+import {
+  reducer as keyValuePairsReducer,
+  sagas as keyValuePairsSagas
+} from "./key-value-pairs";
 
 const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
 
@@ -64,7 +68,8 @@ const reducers = combineReducers({
   weapons: weaponsReducer,
   toastr: toastrReducer,
   eq: eqReducer,
-  info: infoReducer
+  info: infoReducer,
+  keyValuePairs: keyValuePairsReducer
 });
 
 export const store = createStore(
@@ -83,7 +88,8 @@ function* rootSaga() {
     weaponsSagas(),
     toastrSagas(),
     eqSagas(),
-    infoSagas()
+    infoSagas(),
+    keyValuePairsSagas()
   ]);
 }
 
