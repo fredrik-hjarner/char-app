@@ -105,6 +105,7 @@ export function* fetchAbilitiesSaga() {
 export function* saveAbilitiesSaga({ payload: { abilities } }: Object) {
   const activeCharacter = yield select(activeCharacterSelector);
 
+  // TODO: put these inside of a try-catch!!
   yield KeyValueService.setValue(
     `${activeCharacter}/abilities`,
     JSON.stringify(abilities)

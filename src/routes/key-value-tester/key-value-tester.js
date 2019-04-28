@@ -1,25 +1,26 @@
 import React, { PureComponent } from "react";
+import { ScrollView } from "react-native";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { connect } from "react-redux";
 
 import { KeyValueService } from "api";
-import { B, H1, Container, Padding } from "components";
+import { B, P, H1, Container, Padding } from "components";
 import { LayoutWithHeader, LayoutWithFooter } from "layouts";
-import { keysSelector, fetchAllPairs } from "state-management/key-value-pairs";
+import { pairsSelector, fetchAllPairs } from "state-management/key-value-pairs";
 
 const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
 const saveIcon = <FontAwesome5Icon name="save" color="white" size={iconSize} />;
 
 type Props = {
-  keys: [string]
+  pairs: [{ key: string, value: string }]
 };
 
 type State = {};
 
 const mapStateToProps = state => ({
-  keys: keysSelector(state)
+  pairs: pairsSelector(state)
 });
 
 @connect(
@@ -42,8 +43,18 @@ export default class extends PureComponent<Props, State> {
       .catch(exception => console.log("exception:", exception, ""));
 
   renderKeys() {
-    const { keys } = this.props;
-    return keys.map(k => <B>{k}:</B>);
+    const { pairs } = this.props;
+    return pairs.map(({ key, value }) => (
+      <>
+        <B>{key}:</B>
+        {/*
+          TODO:
+          This is definitely a bug. Value SHOULD be a string, not an object
+          by this point... i.e. a string should be returned by the server.
+        */}
+        <P>{JSON.stringify(value, null, 2)}</P>
+      </>
+    ));
   }
 
   render() {
@@ -55,11 +66,13 @@ export default class extends PureComponent<Props, State> {
     return (
       <LayoutWithHeader>
         <LayoutWithFooter actions={actions}>
-          <Container>
-            <H1>List of all keys</H1>
-            <Padding />
-            {this.renderKeys()}
-          </Container>
+          <ScrollView>
+            <Container>
+              <H1>List of all keys</H1>
+              <Padding />
+              {this.renderKeys()}
+            </Container>
+          </ScrollView>
         </LayoutWithFooter>
       </LayoutWithHeader>
     );
