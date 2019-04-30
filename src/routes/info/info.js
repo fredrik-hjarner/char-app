@@ -1,6 +1,8 @@
-import React, { PureComponent } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native";
+import { reduxForm, Field } from "redux-form";
+import { mapProps } from "recompose";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
@@ -10,12 +12,14 @@ import {
   Container,
   Grid,
   Column,
-  TextInput,
   Padding,
-  InnerContainer,
-  TextArea
+  InnerContainer
 } from "components";
-import { infoSelector, fetchInfo } from "state-management/info";
+import { TextInput, TextArea } from "components/form";
+import { infoSelector, fetchInfo, saveInfo } from "state-management/info";
+import { reduxFormBugFix } from "utils";
+
+const formName = "info";
 
 const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
@@ -34,176 +38,125 @@ type Props = {
     flaws: string,
     background: string
   },
-  fetchInfo: Function
+  fetchInfo: Function,
+  saveInfo: Function
 };
 
 const mapStateToProps = state => ({
   info: infoSelector(state)
 });
 
-export default connect(
-  mapStateToProps,
-  { fetchInfo }
-)(
-  class extends PureComponent<Props> {
-    constructor(props: Props) {
-      super(props);
-      const { ...all } = props.info;
-      this.state = {
-        info: { ...all }
-      };
-    }
+const Info = (props: Props) => {
+  const load = () => props.fetchInfo();
 
-    componentDidMount() {
-      this.props.fetchInfo();
-    }
+  useEffect(() => {
+    load();
+  }, []);
 
-    componentDidUpdate(prevProps, prevState) {
-      // if I changed state dont overwrite them with props.
-      if (this.state === prevState) {
-        this.copyPropsToState();
-      }
-    }
-
-    copyPropsToState() {
-      const {
-        info: { ...all }
-      } = this.props;
-      this.setState({
-        info: { ...all }
-      });
-    }
-
-    handleChange = (key: string) => (value: string) => {
-      this.setState(({ info }) => ({
-        info: { ...info, [key]: value }
-      }));
-    };
-
-    renderInfo() {
-      const {
-        characterName,
-        playerName,
-        classesAndLevels,
-        race,
-        alignment,
-        xp
-      } = this.state.info;
-
-      return (
-        <InnerContainer>
-          <Grid>
-            <Column width={11}>
-              <P>Character name:</P>
-              <TextInput
-                style={{ width: 1000 }}
-                onChangeText={this.handleChange("characterName")}
-                value={characterName}
-              />
-            </Column>
-            <Column />
-            <Column width={6}>
-              <P>Player name:</P>
-              <TextInput
-                onChangeText={this.handleChange("playerName")}
-                value={playerName}
-              />
-            </Column>
-          </Grid>
-          <Padding />
-          <Grid>
-            <Column width={11}>
-              <P>Classes {"&"} levels:</P>
-              <TextInput
-                style={{ width: 1000 }}
-                onChangeText={this.handleChange("classesAndLevels")}
-                value={classesAndLevels}
-              />
-            </Column>
-            <Column />
-            <Column width={6}>
-              <P>Race:</P>
-              <TextInput
-                onChangeText={this.handleChange("race")}
-                value={race}
-              />
-            </Column>
-          </Grid>
-          <Padding />
-          <Grid>
-            <Column width={11}>
-              <P>Alignment:</P>
-              <TextInput
-                style={{ width: 1000 }}
-                onChangeText={this.handleChange("alignment")}
-                value={alignment}
-              />
-            </Column>
-            <Column />
-            <Column width={6}>
-              <P>XP:</P>
-              <TextInput onChangeText={this.handleChange("XP")} value={xp} />
-            </Column>
-          </Grid>
-        </InnerContainer>
-      );
-    }
-
-    renderRoleplay() {
-      const { ideals, bonds, flaws, background } = this.state.info;
-      return (
-        <InnerContainer>
-          <P>Ideals:</P>
-          <TextArea
-            numberOfLines={1}
-            onChangeText={this.handleChange("ideals")}
-            value={ideals}
-          />
-          <Padding />
-
-          <P>Bonds:</P>
-          <TextArea
-            numberOfLines={1}
-            onChangeText={this.handleChange("bonds")}
-            value={bonds}
-          />
-          <Padding />
-
-          <P>Flaws:</P>
-          <TextArea
-            numberOfLines={1}
-            onChangeText={this.handleChange("flaws")}
-            value={flaws}
-          />
-          <Padding />
-
-          <P>Background story:</P>
-          <TextArea
-            onChangeText={this.handleChange("background")}
-            value={background}
-          />
-          <Padding />
-        </InnerContainer>
-      );
-    }
-
-    render() {
-      const actions = [
-        { text: "Load", callback: this.load, icon: loadIcon },
-        { text: "Save", callback: this.save, icon: saveIcon }
-      ];
-      return (
-        <LayoutWithHeader>
-          <LayoutWithFooter actions={actions}>
-            <ScrollView>
-              <Container>
-                {this.renderInfo()}
-                {this.renderRoleplay()}
-              </Container>
-            </ScrollView>
-          </LayoutWithFooter>
-        </LayoutWithHeader>
-      );
-    }
+  function renderInfo() {
+    return (
+      <InnerContainer>
+        <Grid>
+          <Column width={11}>
+            <P>Character name:</P>
+            <Field
+              name="characterName"
+              component={TextInput}
+              style={{ width: 1000 }}
+            />
+          </Column>
+          <Column />
+          <Column width={6}>
+            <P>Player name:</P>
+            <Field name="playerName" component={TextInput} />
+          </Column>
+        </Grid>
+        <Padding />
+        <Grid>
+          <Column width={11}>
+            <P>Classes {"&"} levels:</P>
+            <Field
+              name="classesAndLevels"
+              component={TextInput}
+              style={{ width: 1000 }}
+            />
+          </Column>
+          <Column />
+          <Column width={6}>
+            <P>Race:</P>
+            <Field name="race" component={TextInput} />
+          </Column>
+        </Grid>
+        <Padding />
+        <Grid>
+          <Column width={11}>
+            <P>Alignment:</P>
+            <Field
+              name="alignment"
+              component={TextInput}
+              style={{ width: 1000 }}
+            />
+          </Column>
+          <Column />
+          <Column width={6}>
+            <P>XP:</P>
+            <Field name="xp" component={TextInput} />
+          </Column>
+        </Grid>
+      </InnerContainer>
+    );
   }
-);
+
+  function renderRoleplay() {
+    return (
+      <InnerContainer>
+        <P>Ideals:</P>
+        <Field name="ideals" component={TextArea} numberOfLines={1} />
+        <Padding />
+
+        <P>Bonds:</P>
+        <Field name="bonds" component={TextArea} numberOfLines={1} />
+        <Padding />
+
+        <P>Flaws:</P>
+        <Field name="flaws" component={TextArea} numberOfLines={1} />
+        <Padding />
+
+        <P>Background story:</P>
+        <Field name="background" component={TextArea} />
+        <Padding />
+      </InnerContainer>
+    );
+  }
+
+  const actions = [
+    { text: "Load", callback: load, icon: loadIcon },
+    { text: "Save", callback: props.handleSubmit, icon: saveIcon }
+  ];
+  return (
+    <LayoutWithHeader>
+      <LayoutWithFooter actions={actions}>
+        <ScrollView>
+          <Container>
+            {renderInfo()}
+            {renderRoleplay()}
+          </Container>
+        </ScrollView>
+      </LayoutWithFooter>
+    </LayoutWithHeader>
+  );
+};
+
+const onSubmit = (values, dispatch, props) => props.saveInfo(values);
+
+export default Info
+  |> reduxForm({ form: formName, onSubmit })
+  |> reduxFormBugFix
+  |> mapProps(({ info, ...props }) => ({
+    ...props,
+    initialValues: info
+  }))
+  |> connect(
+    mapStateToProps,
+    { fetchInfo, saveInfo }
+  );
