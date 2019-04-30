@@ -5,9 +5,13 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 import { connect } from "react-redux";
 
 import { KeyValueService } from "api";
-import { B, P, H1, Container, Padding } from "components";
+import { B, H1, Container, Padding } from "components";
 import { LayoutWithHeader, LayoutWithFooter } from "layouts";
-import { pairsSelector, fetchAllPairs } from "state-management/key-value-pairs";
+import {
+  pairsSelector,
+  fetchAllPairs,
+  deleteAllPairs
+} from "state-management/key-value-pairs";
 
 const iconSize = 20;
 const loadIcon = <FeatherIcon name="download" color="white" size={iconSize} />;
@@ -25,7 +29,7 @@ const mapStateToProps = state => ({
 
 @connect(
   mapStateToProps,
-  { fetchAllPairs }
+  { fetchAllPairs, deleteAllPairs }
 )
 export default class extends PureComponent<Props, State> {
   componentDidMount() {
@@ -37,10 +41,7 @@ export default class extends PureComponent<Props, State> {
       .then(this.getAllKeys)
       .catch(exception => console.log("exception:", exception, ""));
 
-  deleteAllValues = () =>
-    KeyValueService.deleteAllValues()
-      .then(this.getAllKeys)
-      .catch(exception => console.log("exception:", exception, ""));
+  deleteAllValues = () => this.props.deleteAllPairs();
 
   renderKeys() {
     const { pairs } = this.props;
