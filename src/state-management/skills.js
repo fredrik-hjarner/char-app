@@ -106,16 +106,7 @@ export function* fetchSkillsSaga() {
   const activeCharacter = yield select(activeCharacterSelector);
 
   try {
-    let skills = yield KeyValueService.getValue(`${activeCharacter}/skills`);
-
-    /**
-     * TODO: This is quite ugly but check if no values was returned
-     * and put in default props.
-     */
-    if (!skills?.arcana) {
-      skills = INITIAL_STATE.skills; // eslint-disable-line
-    }
-
+    const skills = yield KeyValueService.getValue(`${activeCharacter}/skills`);
     yield put({ type: FETCH_SKILLS_SUCCESS, payload: { skills } });
   } catch (exception) {
     console.log("fetchSkillsSaga: catch:");

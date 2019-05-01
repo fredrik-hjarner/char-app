@@ -4,7 +4,7 @@ import { Field } from "redux-form";
 
 import { Text, H1, Grid, Column, Padding } from "components";
 import { TextInput } from "components/form";
-import { calcMod } from "utils";
+import { calcMod, plusOrMinus } from "utils";
 
 export default () => {
   const renderTableHeader = () => (
@@ -38,7 +38,7 @@ export default () => {
           <H1 style={{ fontWeight: "normal" }}>
             <Field
               name={ability}
-              component={({ input: { value } }) => calcMod(value)}
+              component={({ input: { value } }) => plusOrMinus(calcMod(value))}
             />
           </H1>
         </Column>

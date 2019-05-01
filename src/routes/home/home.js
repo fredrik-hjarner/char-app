@@ -21,6 +21,8 @@ import {
 import { reduxFormBugFix } from "utils";
 import Abilities from "./abilities";
 import Skills from "./skills";
+import Proficiency from "./proficiency";
+import SavingThrows from "./saving-throws";
 
 const formName = "skills";
 
@@ -63,6 +65,8 @@ const Stats = ({ handleSubmit, abilities, ...props }: Props) => {
           <Container>
             <FormSection name="abilities" component={Abilities} />
             <Padding big />
+            <Proficiency />
+            <SavingThrows />
             <FormSection
               name="skills"
               component={Skills}
