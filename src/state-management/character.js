@@ -8,6 +8,7 @@ import { saveAC } from "./ac";
 import { saveWeapons, INITIAL_STATE as WEAPONS_INITIAL_STATE } from "./weapons";
 import { saveInfo, INITIAL_STATE as INFO_INITIAL_STATE } from "./info";
 import { saveEQ, INITIAL_STATE as EQ_INITIAL_STATE } from "./eq";
+import { saveSkills, INITIAL_STATE as SKILLS_INITIAL_STATE } from "./skills";
 import { openToastr, TOASTR_ERROR } from "./toastr";
 
 /** *****************************************************************
@@ -132,6 +133,9 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
 
     // Create default EQ
     yield put(saveEQ(EQ_INITIAL_STATE.eq));
+
+    // Create default skills
+    yield put(saveSkills(SKILLS_INITIAL_STATE.skills));
 
     yield put(pushRoute("Home"));
   } catch (exception) {

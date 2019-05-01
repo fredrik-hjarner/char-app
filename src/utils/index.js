@@ -1,13 +1,3 @@
-export { default as reduxFormBugFix } from "./redux-form-bug-fix";
-
-export const calcMod = (ability: number): string => {
-  const diff = parseInt(ability, 10) - 10;
-  const mod = Math.round((diff - 1) / 2);
-  if (mod > 0) {
-    return `+${mod}`;
-  }
-  if (mod === 0) {
-    return ` ${mod}`;
-  }
-  return `${mod}`;
-};
+export * from "./HOCs";
+export { default as calcMod } from "./calc-mod";
+export { default as plusOrMinus } from "./plus-or-minus";

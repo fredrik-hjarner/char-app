@@ -21,6 +21,7 @@ import { reducer as weaponsReducer, sagas as weaponsSagas } from "./weapons";
 import { reducer as toastrReducer, sagas as toastrSagas } from "./toastr";
 import { reducer as eqReducer, sagas as eqSagas } from "./eq";
 import { reducer as infoReducer, sagas as infoSagas } from "./info";
+import { reducer as skillsReducer, sagas as skillsSagas } from "./skills";
 import {
   reducer as keyValuePairsReducer,
   sagas as keyValuePairsSagas
@@ -71,7 +72,8 @@ const reducers = combineReducers({
   toastr: toastrReducer,
   eq: eqReducer,
   info: infoReducer,
-  keyValuePairs: keyValuePairsReducer
+  keyValuePairs: keyValuePairsReducer,
+  skills: skillsReducer
 });
 
 export const store = createStore(
@@ -91,7 +93,8 @@ function* rootSaga() {
     toastrSagas(),
     eqSagas(),
     infoSagas(),
-    keyValuePairsSagas()
+    keyValuePairsSagas(),
+    skillsSagas()
   ]);
 }
 

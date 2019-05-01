@@ -81,13 +81,6 @@ const EQ = (props: Props) => {
 
 const onSubmit = (values, dispatch, props) => props.saveEQ(values);
 
-const log = message => Component => props => {
-  /* console.log(message);
-  console.log("props:", props);
-  console.log("\n\n"); */
-  return <Component {...props} />;
-};
-
 export default EQ
   |> reduxForm({ form: formName, onSubmit })
   |> reduxFormBugFix

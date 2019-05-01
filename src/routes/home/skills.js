@@ -1,31 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { lowerCase, capitalize } from "lodash";
+import { Field } from "redux-form";
 
-import {
-  Text as TextComponent,
-  Grid,
-  Column,
-  Padding,
-  TouchableOpacity
-} from "components";
-import { calcMod } from "utils";
+import { Text as TextComponent, Grid, Column, Padding } from "components";
+import { Checkbox } from "components/form";
+import { calcMod, plusOrMinus } from "utils";
 
 type Props = {
   abilities: {
     strength: number,
-    dexterityterity: number,
+    dexterity: number,
     constitution: number,
     intelligence: number,
-    wisdomdom: number,
+    wisdom: number,
     charisma: number
   }
 };
 
-type State = {};
-
-export default class App extends Component<Props, State> {
-  renderHeader() {
+export default ({ abilities }: Props) => {
+  function renderHeader() {
     return (
       <Grid style={{ opacity: 0.5 }}>
         <Column width={3}>
@@ -42,39 +36,45 @@ export default class App extends Component<Props, State> {
     );
   }
 
-  renderSkill(skill, ability: string) {
-    const abScore = this.props.abilities[ability];
+  function renderSkill(skill, ability: string) {
+    const abScore = abilities[ability];
+    // TODO: take proficiency from redux state.
+    const proficiency = 2;
+    const abBonus = calcMod(abScore);
     return (
       <Grid>
         <Column width={1}>
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              borderColor: "hsl(0, 0%, 50%)",
-              height: 23,
-              width: 20,
-              marginBottom: 3,
-              borderRadius: 3,
-              padding: 0,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Text style={{ margin: 0, padding: 0 }}>X</Text>
-          </TouchableOpacity>
+          <Field name={skill} component={Checkbox} />
         </Column>
         <Column />
         <Column width={1}>
-          <Text>2</Text>
+          <Text>
+            <Field
+              name={skill}
+              component={({ input: { value } }) =>
+                value ? `+${proficiency}` : ""
+              }
+            />
+          </Text>
         </Column>
         <Column />
         <Column width={1}>
-          <Text>{calcMod(abScore)}</Text>
+          <Text>{plusOrMinus(abBonus)}</Text>
         </Column>
         <Column />
         <Column width={1}>
           <View>
-            <Text style={{ fontWeight: "bold" }}>+5</Text>
+            <Text style={{ fontWeight: "bold" }}>
+              <Field
+                name={skill}
+                component={({ input: { value } }) => {
+                  const total = value
+                    ? parseInt(abBonus, 10) + parseInt(proficiency, 10)
+                    : abBonus;
+                  return plusOrMinus(total);
+                }}
+              />
+            </Text>
           </View>
         </Column>
         <Column />
@@ -88,33 +88,31 @@ export default class App extends Component<Props, State> {
     );
   }
 
-  render() {
-    return (
-      <>
-        {this.renderHeader()}
-        <Padding />
-        {this.renderSkill("acrobatics", "dexterity")}
-        {this.renderSkill("animalHandling", "wisdom")}
-        {this.renderSkill("arcana", "dexterity")}
-        {this.renderSkill("athletics", "strength")}
-        {this.renderSkill("deception", "charisma")}
-        {this.renderSkill("history", "intelligence")}
-        {this.renderSkill("insight", "wisdom")}
-        {this.renderSkill("intimidation", "charisma")}
-        {this.renderSkill("investigation", "intelligence")}
-        {this.renderSkill("medicine", "wisdom")}
-        {this.renderSkill("nature", "intelligence")}
-        {this.renderSkill("perception", "wisdom")}
-        {this.renderSkill("performance", "charisma")}
-        {this.renderSkill("persuasion", "charisma")}
-        {this.renderSkill("religion", "intelligence")}
-        {this.renderSkill("sleightOfHand", "dexterity")}
-        {this.renderSkill("stealth", "dexterity")}
-        {this.renderSkill("survival", "wisdom")}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      {renderHeader()}
+      <Padding />
+      {renderSkill("acrobatics", "dexterity")}
+      {renderSkill("animalHandling", "wisdom")}
+      {renderSkill("arcana", "dexterity")}
+      {renderSkill("athletics", "strength")}
+      {renderSkill("deception", "charisma")}
+      {renderSkill("history", "intelligence")}
+      {renderSkill("insight", "wisdom")}
+      {renderSkill("intimidation", "charisma")}
+      {renderSkill("investigation", "intelligence")}
+      {renderSkill("medicine", "wisdom")}
+      {renderSkill("nature", "intelligence")}
+      {renderSkill("perception", "wisdom")}
+      {renderSkill("performance", "charisma")}
+      {renderSkill("persuasion", "charisma")}
+      {renderSkill("religion", "intelligence")}
+      {renderSkill("sleightOfHand", "dexterity")}
+      {renderSkill("stealth", "dexterity")}
+      {renderSkill("survival", "wisdom")}
+    </>
+  );
+};
 
 const Text = ({ children, style, ...props }) => (
   <TextComponent style={[s.absolute, style]} {...props}>
