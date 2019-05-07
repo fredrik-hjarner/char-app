@@ -4,9 +4,21 @@ import { lowerCase, capitalize } from "lodash";
 import { Field } from "redux-form";
 
 import { Text, Grid, Column, Padding } from "components";
-import { Checkbox } from "components/form";
-import { calcMod, plusOrMinus } from "utils";
+import { TextInput } from "components/form";
 
 export default () => {
-  return <Text>Proficiency</Text>;
+  return (
+    <Grid>
+      <Column vc width={9}>
+        <Text>Proficiency bonus:</Text>
+      </Column>
+      <Column vc width={9}>
+        <Field
+          name="proficiency-bonus"
+          component={TextInput}
+          keyboardType="numeric"
+        />
+      </Column>
+    </Grid>
+  );
 };

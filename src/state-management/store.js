@@ -23,6 +23,10 @@ import { reducer as eqReducer, sagas as eqSagas } from "./eq";
 import { reducer as infoReducer, sagas as infoSagas } from "./info";
 import { reducer as skillsReducer, sagas as skillsSagas } from "./skills";
 import {
+  reducer as proficiencyBonusReducer,
+  sagas as proficiencyBonusSagas
+} from "./proficiency-bonus";
+import {
   reducer as keyValuePairsReducer,
   sagas as keyValuePairsSagas
 } from "./key-value-pairs";
@@ -73,7 +77,8 @@ const reducers = combineReducers({
   eq: eqReducer,
   info: infoReducer,
   keyValuePairs: keyValuePairsReducer,
-  skills: skillsReducer
+  skills: skillsReducer,
+  proficiencyBonus: proficiencyBonusReducer
 });
 
 export const store = createStore(
@@ -94,7 +99,8 @@ function* rootSaga() {
     eqSagas(),
     infoSagas(),
     keyValuePairsSagas(),
-    skillsSagas()
+    skillsSagas(),
+    proficiencyBonusSagas()
   ]);
 }
 

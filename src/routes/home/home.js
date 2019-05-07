@@ -63,10 +63,16 @@ const Stats = ({ handleSubmit, abilities, ...props }: Props) => {
       <LayoutWithFooter actions={actions}>
         <ScrollView>
           <Container>
+            <FormSection name="proficiency-bonus" component={Proficiency} />
+            <Padding big />
             <FormSection name="abilities" component={Abilities} />
             <Padding big />
-            <Proficiency />
-            <SavingThrows />
+            <FormSection
+              name="saving-throws"
+              component={SavingThrows}
+              abilities={abilities}
+            />
+            <Padding big />
             <FormSection
               name="skills"
               component={Skills}

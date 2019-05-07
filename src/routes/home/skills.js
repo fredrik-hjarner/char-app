@@ -26,9 +26,6 @@ export default ({ abilities }: Props) => {
           <TextComponent>profici</TextComponent>
         </Column>
         <Column />
-        <Column width={2}>
-          <TextComponent>ab </TextComponent>
-        </Column>
         <Column width={8}>
           <TextComponent>total</TextComponent>
         </Column>
@@ -45,21 +42,6 @@ export default ({ abilities }: Props) => {
       <Grid>
         <Column width={1}>
           <Field name={skill} component={Checkbox} />
-        </Column>
-        <Column />
-        <Column width={1}>
-          <Text>
-            <Field
-              name={skill}
-              component={({ input: { value } }) =>
-                value ? `+${proficiency}` : ""
-              }
-            />
-          </Text>
-        </Column>
-        <Column />
-        <Column width={1}>
-          <Text>{plusOrMinus(abBonus)}</Text>
         </Column>
         <Column />
         <Column width={1}>
@@ -80,9 +62,6 @@ export default ({ abilities }: Props) => {
         <Column />
         <Column width={8}>
           <Text>{capitalize(lowerCase(skill))}</Text>
-        </Column>
-        <Column width={2}>
-          <Text>{ability.slice(0, 3)}</Text>
         </Column>
       </Grid>
     );
