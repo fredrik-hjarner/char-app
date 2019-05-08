@@ -4,8 +4,9 @@ import { Provider as StoreProvider } from "react-redux";
 import { Provider as PaperProvider } from "react-native-paper";
 import { PersistGate } from "redux-persist/lib/integration/react";
 
-import { persistor, store } from "./src/state-management/store";
-import { NavigationManager } from "./src/navigation";
+import { persistor, store } from "state-management/store";
+import { NavigationManager } from "navigation";
+import { Modal } from "components";
 
 export default class extends React.Component {
   render() {
@@ -16,6 +17,7 @@ export default class extends React.Component {
           loading={<View style={{ backgroundColor: "white", flex: 1 }} />}
         >
           <PaperProvider>
+            <Modal />
             <NavigationManager />
           </PaperProvider>
         </PersistGate>

@@ -15,6 +15,7 @@ import {
   sagas as abilitiesSagas
 } from "./abilities";
 import { reducer as navigationReducer } from "./navigation";
+import { reducer as modalReducer } from "./modal";
 import { reducer as hpReducer, sagas as hpSagas } from "./hp";
 import { reducer as acReducer, sagas as acSagas } from "./ac";
 import { reducer as weaponsReducer, sagas as weaponsSagas } from "./weapons";
@@ -78,7 +79,8 @@ const reducers = combineReducers({
   info: infoReducer,
   keyValuePairs: keyValuePairsReducer,
   skills: skillsReducer,
-  proficiencyBonus: proficiencyBonusReducer
+  proficiencyBonus: proficiencyBonusReducer,
+  modal: modalReducer
 });
 
 export const store = createStore(
