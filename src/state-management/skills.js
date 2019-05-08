@@ -41,24 +41,24 @@ type State = {
 
 export const INITIAL_STATE: State = {
   skills: {
-    acrobatics: true,
-    animalHandling: true,
-    arcana: true,
-    athletics: true,
-    deception: true,
-    history: true,
-    insight: true,
-    intimidation: true,
-    investigation: true,
-    medicine: true,
-    nature: true,
-    perception: true,
-    performance: true,
-    persuasion: true,
-    religion: true,
-    sleightOfHand: true,
-    stealth: true,
-    survival: true
+    acrobatics: false,
+    animalHandling: false,
+    arcana: false,
+    athletics: false,
+    deception: false,
+    history: false,
+    insight: false,
+    intimidation: false,
+    investigation: false,
+    medicine: false,
+    nature: false,
+    perception: false,
+    performance: false,
+    persuasion: false,
+    religion: false,
+    sleightOfHand: false,
+    stealth: false,
+    survival: false
   }
 };
 

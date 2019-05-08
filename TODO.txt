@@ -1,3 +1,2 @@
-* add Proficiency bonus
-* Add saving throws
+* prof bonus should be passed in to Skills and SavingThrows components.
 * + and such characters don't work.
