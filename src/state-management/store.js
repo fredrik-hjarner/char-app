@@ -28,6 +28,10 @@ import {
   sagas as proficiencyBonusSagas
 } from "./proficiency-bonus";
 import {
+  reducer as savingThrowsReducer,
+  sagas as savingThrowsSagas
+} from "./saving-throws";
+import {
   reducer as keyValuePairsReducer,
   sagas as keyValuePairsSagas
 } from "./key-value-pairs";
@@ -80,7 +84,8 @@ const reducers = combineReducers({
   keyValuePairs: keyValuePairsReducer,
   skills: skillsReducer,
   proficiencyBonus: proficiencyBonusReducer,
-  modal: modalReducer
+  modal: modalReducer,
+  savingThrows: savingThrowsReducer
 });
 
 export const store = createStore(
@@ -102,7 +107,8 @@ function* rootSaga() {
     infoSagas(),
     keyValuePairsSagas(),
     skillsSagas(),
-    proficiencyBonusSagas()
+    proficiencyBonusSagas(),
+    savingThrowsSagas()
   ]);
 }
 

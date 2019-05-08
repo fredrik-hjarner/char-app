@@ -9,6 +9,14 @@ import { saveWeapons, INITIAL_STATE as WEAPONS_INITIAL_STATE } from "./weapons";
 import { saveInfo, INITIAL_STATE as INFO_INITIAL_STATE } from "./info";
 import { saveEQ, INITIAL_STATE as EQ_INITIAL_STATE } from "./eq";
 import { saveSkills, INITIAL_STATE as SKILLS_INITIAL_STATE } from "./skills";
+import {
+  saveProficiencyBonus,
+  INITIAL_STATE as PROFICIENCY_BONUS_INITIAL_STATE
+} from "./proficiency-bonus";
+import {
+  saveSavingThrows,
+  INITIAL_STATE as SAVING_THROWS_INITIAL_STATE
+} from "./saving-throws";
 import { openToastr, TOASTR_ERROR } from "./toastr";
 
 /** *****************************************************************
@@ -136,6 +144,14 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
 
     // Create default skills
     yield put(saveSkills(SKILLS_INITIAL_STATE.skills));
+
+    // Create default proficiency bonus
+    yield put(
+      saveProficiencyBonus(PROFICIENCY_BONUS_INITIAL_STATE.proficiencyBonus)
+    );
+
+    // Create default saving throws
+    yield put(saveSavingThrows(SAVING_THROWS_INITIAL_STATE.savingThrows));
 
     yield put(pushRoute("Home"));
   } catch (exception) {

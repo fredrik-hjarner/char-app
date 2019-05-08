@@ -13,7 +13,7 @@ export default () => {
       </Column>
       <Column vc width={3}>
         <Field
-          name="proficiency-bonus"
+          name="proficiencyBonus"
           component={TextInput}
           keyboardType="numeric"
         />

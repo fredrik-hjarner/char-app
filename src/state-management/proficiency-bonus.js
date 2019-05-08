@@ -17,11 +17,11 @@ const SAVE_PROFICIENCY_BONUS_SUCCESS = "SAVE_PROFICIENCY_BONUS_SUCCESS";
 const SAVE_PROFICIENCY_BONUS_ERROR = "SAVE_PROFICIENCY_BONUS_ERROR";
 
 type State = {
-  proficiencyBonus: number
+  proficiencyBonus: string
 };
 
 export const INITIAL_STATE: State = {
-  proficiencyBonus: 0
+  proficiencyBonus: "0"
 };
 
 /** *****************************************************************
@@ -49,9 +49,9 @@ export const fetchProficiencyBonus = () => ({
   type: FETCH_PROFICIENCY_BONUS_START
 });
 
-export const saveProficiencyBonus = (proficiencyBonus: number) => ({
+export const saveProficiencyBonus = (proficiencyBonus: Object) => ({
   type: SAVE_PROFICIENCY_BONUS_START,
-  payload: { proficiencyBonus }
+  payload: { ...proficiencyBonus }
 });
 
 /** *****************************************************************
@@ -59,7 +59,7 @@ export const saveProficiencyBonus = (proficiencyBonus: number) => ({
 ****************************************************************** */
 
 export const proficiencyBonusSelector = (state: Object): Object =>
-  state.proficiencyBonus.proficiencyBonus;
+  state.proficiencyBonus;
 
 /** *****************************************************************
     Sagas

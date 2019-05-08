@@ -18,6 +18,16 @@ import {
   saveSkills,
   skillsSelector
 } from "state-management/skills";
+import {
+  fetchProficiencyBonus,
+  saveProficiencyBonus,
+  proficiencyBonusSelector
+} from "state-management/proficiency-bonus";
+import {
+  fetchSavingThrows,
+  saveSavingThrows,
+  savingThrowsSelector
+} from "state-management/saving-throws";
 import { reduxFormBugFix } from "utils";
 import Abilities from "./abilities";
 import Skills from "./skills";
@@ -43,13 +53,21 @@ type Props = {
   saveAbilities: Function,
 
   fetchSkills: Function,
-  saveSkills: Function
+  saveSkills: Function,
+
+  fetchProficiencyBonus: Function,
+  saveProficiencyBonus: Function,
+
+  fetchSavingThrows: Function,
+  saveSavingThrows: Function
 };
 
 const Stats = ({ handleSubmit, abilities, ...props }: Props) => {
   const load = () => {
     props.fetchAbilities();
     props.fetchSkills();
+    props.fetchProficiencyBonus();
+    props.fetchSavingThrows();
   };
 
   useEffect(() => load(), []);
@@ -63,12 +81,12 @@ const Stats = ({ handleSubmit, abilities, ...props }: Props) => {
       <LayoutWithFooter actions={actions}>
         <ScrollView>
           <Container>
-            <FormSection name="proficiency-bonus" component={Proficiency} />
+            <FormSection name="proficiencyBonus" component={Proficiency} />
             <Padding big />
             <FormSection name="abilities" component={Abilities} />
             <Padding big />
             <FormSection
-              name="saving-throws"
+              name="savingThrows"
               component={SavingThrows}
               abilities={abilities}
             />
@@ -88,22 +106,38 @@ const Stats = ({ handleSubmit, abilities, ...props }: Props) => {
 const onSubmit = (values, dispatch, props) => {
   props.saveAbilities(values.abilities);
   props.saveSkills(values.skills);
+  props.saveProficiencyBonus(values.proficiencyBonus);
+  props.saveSavingThrows(values.savingThrows);
 };
 
 const mapStateToProps = state => ({
   abilities: abilitiesSelector(state),
-  skills: skillsSelector(state)
+  skills: skillsSelector(state),
+  proficiencyBonus: proficiencyBonusSelector(state),
+  savingThrows: savingThrowsSelector(state)
 });
 
 export default Stats
   |> reduxForm({ form: formName, onSubmit })
   |> reduxFormBugFix
-  |> mapProps(({ abilities, skills, ...props }) => ({
-    abilities,
-    initialValues: { abilities, skills },
-    ...props
-  }))
+  |> mapProps(
+    ({ abilities, skills, proficiencyBonus, savingThrows, ...props }) => ({
+      abilities,
+      proficiencyBonus,
+      initialValues: { abilities, skills, proficiencyBonus, savingThrows },
+      ...props
+    })
+  )
   |> connect(
     mapStateToProps,
-    { fetchAbilities, fetchSkills, saveAbilities, saveSkills }
+    {
+      fetchAbilities,
+      saveAbilities,
+      fetchSkills,
+      saveSkills,
+      fetchProficiencyBonus,
+      saveProficiencyBonus,
+      fetchSavingThrows,
+      saveSavingThrows
+    }
   );

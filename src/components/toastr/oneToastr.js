@@ -36,10 +36,10 @@ export default class extends React.Component<Props> {
   renderIcon(type) {
     switch (type) {
       case TOASTR_ERROR:
-        return <MaterialIcon name="error-outline" size={30} />;
+        return <MaterialIcon name="error-outline" size={23} />;
       default:
       case TOASTR_SUCCESS:
-        return <MaterialCommunityIcon name="check-circle-outline" size={30} />;
+        return <MaterialCommunityIcon name="check-circle-outline" size={23} />;
     }
   }
 
@@ -63,7 +63,7 @@ export default class extends React.Component<Props> {
 const styles = StyleSheet.create({
   toastr: {
     flexDirection: "row",
-    padding: 10,
+    padding: 5,
     borderRadius: 6,
     marginTop: 2
   },
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: "hsla(0, 100%, 60%, 0.95)"
   },
   text: {
-    marginLeft: 10,
+    marginLeft: 5,
     textAlignVertical: "center"
   }
 });
