@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { lowerCase, capitalize } from "lodash";
 import { Field } from "redux-form";
 
-import { Text as TextComponent, Grid, Column, Padding } from "components";
+import { Text as TextComponent, Grid, Column, Padding, H1 } from "components";
 import { Checkbox } from "components/form";
 import { calcMod, plusOrMinus } from "utils";
 
@@ -19,20 +19,6 @@ type Props = {
 };
 
 export default ({ abilities }: Props) => {
-  function renderHeader() {
-    return (
-      <Grid style={{ opacity: 0.5 }}>
-        <Column width={3}>
-          <TextComponent>profici</TextComponent>
-        </Column>
-        <Column />
-        <Column width={8}>
-          <TextComponent>total</TextComponent>
-        </Column>
-      </Grid>
-    );
-  }
-
   function renderSkill(skill, ability: string) {
     const abScore = abilities[ability];
     // TODO: take proficiency from redux state.
@@ -40,9 +26,14 @@ export default ({ abilities }: Props) => {
     const abBonus = calcMod(abScore);
     return (
       <Grid>
+        <Column width={7}>
+          <Text>{capitalize(lowerCase(skill))}</Text>
+        </Column>
+        <Column />
         <Column width={1}>
           <Field name={skill} component={Checkbox} />
         </Column>
+
         <Column />
         <Column width={1}>
           <View>
@@ -59,17 +50,13 @@ export default ({ abilities }: Props) => {
             </Text>
           </View>
         </Column>
-        <Column />
-        <Column width={8}>
-          <Text>{capitalize(lowerCase(skill))}</Text>
-        </Column>
       </Grid>
     );
   }
 
   return (
     <>
-      {renderHeader()}
+      <H1>Skills</H1>
       <Padding />
       {renderSkill("acrobatics", "dexterity")}
       {renderSkill("animalHandling", "wisdom")}

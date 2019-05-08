@@ -1,9 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { lowerCase, capitalize } from "lodash";
 import { Field } from "redux-form";
 
-import { Text as TextComponent, Grid, Column, Padding } from "components";
+import { Text as TextComponent, Grid, Column, Padding, H1 } from "components";
 import { Checkbox } from "components/form";
 import { calcMod, plusOrMinus } from "utils";
 
@@ -19,19 +18,6 @@ type Props = {
 };
 
 export default ({ abilities }: Props) => {
-  function renderHeader() {
-    return (
-      <Grid style={{ opacity: 0.5 }}>
-        <Column width={4}>
-          <TextComponent>profici</TextComponent>
-        </Column>
-        <Column width={8}>
-          <TextComponent>total</TextComponent>
-        </Column>
-      </Grid>
-    );
-  }
-
   function renderSkill(skill) {
     const abScore = abilities[skill];
     // TODO: take proficiency from redux state.
@@ -39,11 +25,13 @@ export default ({ abilities }: Props) => {
     const abBonus = calcMod(abScore);
     return (
       <Grid>
-        <Column width={3}>
+        <Column width={8}>
+          <Text>{skill.slice(0, 3).toUpperCase()}</Text>
+        </Column>
+        <Column width={5}>
           <Field name={skill} component={Checkbox} />
         </Column>
-        <Column />
-        <Column width={3}>
+        <Column width={4}>
           <View>
             <Text style={{ fontWeight: "bold" }}>
               <Field
@@ -58,28 +46,28 @@ export default ({ abilities }: Props) => {
             </Text>
           </View>
         </Column>
-        <Column />
-        <Column width={8}>
-          <Text>{capitalize(lowerCase(skill))}</Text>
-        </Column>
       </Grid>
     );
   }
 
   return (
     <>
-      {renderHeader()}
+      <H1>Saving throws</H1>
+      <Padding />
       <Padding />
       <Grid>
-        <Column width={9}>
+        <Column width={5}>
           {renderSkill("strength")}
-          {renderSkill("dexterity")}
-          {renderSkill("constitution")}
+          {renderSkill("intelligence")}
         </Column>
         <Column />
-        <Column width={8}>
-          {renderSkill("intelligence")}
+        <Column width={5}>
+          {renderSkill("dexterity")}
           {renderSkill("wisdom")}
+        </Column>
+        <Column />
+        <Column width={5}>
+          {renderSkill("constitution")}
           {renderSkill("charisma")}
         </Column>
       </Grid>

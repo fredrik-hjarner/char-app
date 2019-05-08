@@ -1,18 +1,17 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { lowerCase, capitalize } from "lodash";
 import { Field } from "redux-form";
 
-import { Text, Grid, Column, Padding } from "components";
+import { Text, Grid, Column } from "components";
 import { TextInput } from "components/form";
 
 export default () => {
   return (
     <Grid>
+      <Column width={3} />
       <Column vc width={9}>
         <Text>Proficiency bonus:</Text>
       </Column>
-      <Column vc width={9}>
+      <Column vc width={3}>
         <Field
           name="proficiency-bonus"
           component={TextInput}
