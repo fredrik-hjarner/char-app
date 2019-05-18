@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const backend = "http://192.168.1.103:8080";
+const backend = "http://potifarfar.zapto.org:8080";
 
 export default class {
   static getValue(key: string): Promise<string> {
