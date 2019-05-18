@@ -60,14 +60,14 @@ export default connect(
     renderRoutes() {
       return (
         <Grid style={styles.routesContainer}>
-          <Column width={18}>
+          {/* <Column width={18}>
             <TouchableOpacity
               style={{ width: "100%" }}
               onPress={() => this.props.pushRoute("KeyValueTester")}
             >
               <Text style={styles.text}>Key value pairs</Text>
             </TouchableOpacity>
-          </Column>
+          </Column> */}
 
           <Column width={4}>
             <TouchableOpacity
@@ -79,7 +79,7 @@ export default connect(
           </Column>
 
           <Column width={4}>
-            <TouchableOpacity onPress={() => this.props.pushRoute("Home")}>
+            <TouchableOpacity onPress={() => this.props.pushRoute("Stats")}>
               <Text style={styles.text}>Stats</Text>
             </TouchableOpacity>
           </Column>

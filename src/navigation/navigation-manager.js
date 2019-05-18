@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { View } from "react-native";
 
 import {
-  Home,
+  Stats,
   KeyValueTester,
   CreateNewCharacter,
   CreateFirstCharacter,
@@ -28,8 +28,8 @@ export default connect(mapStateToProps)(
     renderRoute() {
       const { currentRoute } = this.props;
       switch (currentRoute) {
-        case "Home":
-          return <Home />;
+        case "Stats":
+          return <Stats />;
 
         case "KeyValueTester":
           return <KeyValueTester />;
@@ -53,7 +53,7 @@ export default connect(mapStateToProps)(
           return <EQ />;
 
         default:
-          return <Home />;
+          return <Stats />;
       }
     }
 

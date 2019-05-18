@@ -14,14 +14,13 @@ type Props = {
     intelligence: number,
     wisdom: number,
     charisma: number
-  }
+  },
+  proficiencyBonus: string
 };
 
-export default ({ abilities }: Props) => {
+export default ({ abilities, proficiencyBonus }: Props) => {
   function renderSkill(skill) {
     const abScore = abilities[skill];
-    // TODO: take proficiency from redux state.
-    const proficiency = 2;
     const abBonus = calcMod(abScore);
     return (
       <Grid>
@@ -38,7 +37,7 @@ export default ({ abilities }: Props) => {
                 name={skill}
                 component={({ input: { value } }) => {
                   const total = value
-                    ? parseInt(abBonus, 10) + parseInt(proficiency, 10)
+                    ? parseInt(abBonus, 10) + parseInt(proficiencyBonus, 10)
                     : abBonus;
                   return plusOrMinus(total);
                 }}

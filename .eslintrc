@@ -44,7 +44,8 @@
     "generator-star-spacing": 0,
     "arrow-parens": 0,
     "wrap-iife": 0,
-    "no-confusing-arrow": 0
+    "no-confusing-arrow": 0,
+    "spaced-comment": 0
   },
   "settings": {
     "import/resolver": {

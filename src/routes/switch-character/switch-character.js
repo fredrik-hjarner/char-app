@@ -45,7 +45,7 @@ export default connect(
 
     switchCharacter = (character: string) => {
       this.props.setActiveCharacter(character);
-      this.props.pushRoute("Home");
+      this.props.pushRoute("Stats");
     };
 
     render() {

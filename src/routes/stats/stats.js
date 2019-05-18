@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { reduxForm, FormSection } from "redux-form";
-import { mapProps } from "recompose";
+import { withProps } from "recompose";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
 
@@ -62,7 +62,12 @@ type Props = {
   saveSavingThrows: Function
 };
 
-const Stats = ({ handleSubmit, abilities, ...props }: Props) => {
+const Stats = ({
+  handleSubmit,
+  abilities,
+  proficiencyBonus: { proficiencyBonus },
+  ...props
+}: Props) => {
   const load = () => {
     props.fetchAbilities();
     props.fetchSkills();
@@ -89,12 +94,14 @@ const Stats = ({ handleSubmit, abilities, ...props }: Props) => {
               name="savingThrows"
               component={SavingThrows}
               abilities={abilities}
+              proficiencyBonus={proficiencyBonus}
             />
             <Padding big />
             <FormSection
               name="skills"
               component={Skills}
               abilities={abilities}
+              proficiencyBonus={proficiencyBonus}
             />
           </Container>
         </ScrollView>
@@ -120,14 +127,9 @@ const mapStateToProps = state => ({
 export default Stats
   |> reduxForm({ form: formName, onSubmit })
   |> reduxFormBugFix
-  |> mapProps(
-    ({ abilities, skills, proficiencyBonus, savingThrows, ...props }) => ({
-      abilities,
-      proficiencyBonus,
-      initialValues: { abilities, skills, proficiencyBonus, savingThrows },
-      ...props
-    })
-  )
+  |> withProps(({ abilities, skills, proficiencyBonus, savingThrows }) => ({
+    initialValues: { abilities, skills, proficiencyBonus, savingThrows }
+  }))
   |> connect(
     mapStateToProps,
     {

@@ -153,7 +153,7 @@ function* createNewCharacterSaga({ payload: { characterName } }) {
     // Create default saving throws
     yield put(saveSavingThrows(SAVING_THROWS_INITIAL_STATE.savingThrows));
 
-    yield put(pushRoute("Home"));
+    yield put(pushRoute("Stats"));
   } catch (exception) {
     console.log("exception:", exception, "");
     yield put(
